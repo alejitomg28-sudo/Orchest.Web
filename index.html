@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orchest — tu agente proactivo, local-first</title>
+<meta name="description" content="Orchest organiza tu día por voz, decidiendo con vos, no por vos. Local-first: tu cerebro vive en tu máquina.">
+<style>
+  :root {
+    --bg: #14151b;
+    --bg-card: #1c1e26;
+    --text: #ece7da;
+    --text-secondary: #9b9686;
+    --accent: #d99a4e;
+    --accent-text: #14151b;
+    --rule: rgba(236, 231, 218, 0.14);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f6f1e7;
+      --bg-card: #ffffff;
+      --text: #211f1a;
+      --text-secondary: #6b6558;
+      --accent: #a8672a;
+      --accent-text: #ffffff;
+      --rule: rgba(33, 31, 26, 0.14);
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  header.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  header.top .logo { font-size: 1.2rem; font-weight: 700; }
+
+  header.top nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.92rem;
+    margin-left: 24px;
+  }
+
+  header.top nav a:hover { color: var(--text); }
+
+  .hero {
+    padding: 72px 0 56px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+    line-height: 1.15;
+    margin: 0 0 18px;
+  }
+
+  .hero p.tagline {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 56ch;
+    margin: 0 auto 32px;
+  }
+
+  .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 0.96rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid var(--rule);
+  }
+
+  .btn-primary { background: var(--accent); color: var(--accent-text); border: none; }
+  .btn-secondary { background: transparent; color: var(--text); }
+
+  section { padding: 56px 0; border-top: 1px solid var(--rule); }
+
+  section h2 { font-size: 1.5rem; margin: 0 0 8px; text-align: center; }
+
+  section .section-sub {
+    color: var(--text-secondary);
+    text-align: center;
+    max-width: 56ch;
+    margin: 0 auto 40px;
+  }
+
+  .moat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .moat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .moat-card .icon { font-size: 1.6rem; margin-bottom: 10px; }
+  .moat-card h3 { font-size: 1rem; margin: 0 0 8px; }
+  .moat-card p { color: var(--text-secondary); font-size: 0.9rem; margin: 0; }
+
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .plan-card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 28px 24px;
+  }
+
+  .plan-card.featured { border-color: var(--accent); }
+
+  .plan-card h3 { font-size: 1.1rem; margin: 0 0 6px; }
+  .plan-card .price { font-size: 1.6rem; font-weight: 700; margin: 0 0 14px; }
+  .plan-card .price span { font-size: 0.9rem; font-weight: 400; color: var(--text-secondary); }
+
+  .plan-card ul { list-style: none; padding: 0; margin: 0 0 20px; color: var(--text-secondary); font-size: 0.9rem; }
+  .plan-card li { padding: 6px 0; border-top: 1px solid var(--rule); }
+  .plan-card li:first-child { border-top: none; }
+
+  .account-card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 32px;
+    max-width: 380px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .account-card p { color: var(--text-secondary); font-size: 0.92rem; margin: 8px 0 20px; }
+
+  .account-card input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.92rem;
+    margin-bottom: 10px;
+  }
+
+  .account-card input:disabled { opacity: 0.5; }
+
+  footer.note {
+    color: var(--text-secondary);
+    font-size: 0.84rem;
+    text-align: center;
+    padding: 32px 0;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="logo">Orchest</div>
+    <nav>
+      <a href="#producto">Producto</a>
+      <a href="#planes">Planes</a>
+      <a href="#cuenta">Cuenta</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="producto">
+    <h1>Un agente proactivo que vive en tu máquina, no en la nube.</h1>
+    <p class="tagline">
+      Orchest organiza tu día por voz — decidiendo con vos, no por vos, qué merece tu
+      atención y cómo interrumpirte. Local-first de verdad: tus datos no salen sin redactar.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#cuenta">Descargar Orchest</a>
+      <a class="btn btn-secondary" href="#planes">Ver planes</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Por qué Orchest y no otra IA</h2>
+    <p class="section-sub">El diferencial no es qué integra. Es su postura.</p>
+    <div class="moat-grid">
+      <div class="moat-card">
+        <div class="icon">🔒</div>
+        <h3>Local-first de verdad</h3>
+        <p>Tu cerebro vive en tu máquina; nada sale sin redactar.</p>
+      </div>
+      <div class="moat-card">
+        <div class="icon">⚡</div>
+        <h3>Proactivo, no reactivo</h3>
+        <p>Te habla cuando algo urgente aparece — no esperás a preguntarle.</p>
+      </div>
+      <div class="moat-card">
+        <div class="icon">🎙️</div>
+        <h3>Voz + presencia constante</h3>
+        <p>Siempre está ahí; se invoca con una sola tecla.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="planes">
+    <h2>Planes</h2>
+    <p class="section-sub">
+      Construimos primero, tarifamos después — los precios de acá abajo todavía son
+      orientativos mientras terminamos de dar forma al producto.
+    </p>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <h3>Día a día</h3>
+        <p class="price">Gratis</p>
+        <ul>
+          <li>Recordatorios y tareas</li>
+          <li>Calendario visual</li>
+          <li>Voz en tu idioma</li>
+        </ul>
+        <a class="btn btn-secondary" href="#cuenta" style="width:100%;text-align:center;">Empezar</a>
+      </div>
+      <div class="plan-card featured">
+        <h3>Personal Premium</h3>
+        <p class="price">Próximamente <span>/ mes</span></p>
+        <ul>
+          <li>Todo lo de Día a día</li>
+          <li>Ruteo consciente de presencia</li>
+          <li>Control fino de notificaciones</li>
+        </ul>
+        <a class="btn btn-primary" href="#cuenta" style="width:100%;text-align:center;">Avisenme</a>
+      </div>
+      <div class="plan-card">
+        <h3>Empresas</h3>
+        <p class="price">A medida</p>
+        <ul>
+          <li>Slack → voz urgente</li>
+          <li>Compliance local-first</li>
+          <li>Auditoría exportable</li>
+        </ul>
+        <a class="btn btn-secondary" href="#cuenta" style="width:100%;text-align:center;">Hablemos</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="cuenta">
+    <h2>Tu cuenta</h2>
+    <p class="section-sub">Esta sección todavía no está conectada — es un adelanto de cómo va a verse.</p>
+    <div class="account-card">
+      <h3>Creá tu cuenta</h3>
+      <p>Muy pronto vas a poder registrarte acá para descargar Orchest y gestionar tu plan.</p>
+      <input type="email" placeholder="tu@correo.com" disabled>
+      <input type="password" placeholder="Contraseña" disabled>
+      <button class="btn btn-primary" style="width:100%;" disabled>Próximamente</button>
+    </div>
+  </section>
+
+  <footer class="note">Orchest — un agente proactivo, local-first.</footer>
+</div>
+</body>
+</html>
