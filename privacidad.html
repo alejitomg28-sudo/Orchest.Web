@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orchest — Política de Privacidad</title>
+<style>
+  :root {
+    --bg: #0e0f13; --bg-card: #1c1e26; --text: #ece7da; --text-secondary: #9b9686;
+    --accent: #d99a4e; --rule: rgba(236,231,218,0.14); --cloud: #4aa8d9;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f6f1e7; --bg-card: #ffffff; --text: #211f1a; --text-secondary: #6b6558;
+      --accent: #a8672a; --rule: rgba(33,31,26,0.14); --cloud: #2f6fa8;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 40px 24px 80px; }
+  a { color: var(--accent); }
+  .back { display: inline-block; margin-bottom: 24px; color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; }
+  .back:hover { color: var(--text); }
+  h1 { font-size: 1.8rem; margin: 0 0 8px; }
+  .updated { color: var(--text-secondary); font-size: 0.86rem; margin: 0 0 40px; }
+  h2 { font-size: 1.15rem; margin: 40px 0 12px; }
+  p, li { color: var(--text); font-size: 0.94rem; }
+  ul { padding-left: 20px; }
+  .card {
+    background: var(--bg-card); border: 1px solid var(--rule); border-radius: 12px;
+    padding: 18px 20px; margin: 16px 0;
+  }
+  .card.local { border-color: rgba(217,154,78,0.35); }
+  .card.cloud { border-color: rgba(74,168,217,0.3); }
+  .card strong { color: var(--accent); }
+  .card.cloud strong { color: var(--cloud); }
+  .fill { background: rgba(217,154,78,0.15); padding: 1px 6px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html#cuenta">← Volver a Orchest</a>
+  <h1>Política de Privacidad</h1>
+  <p class="updated">Última actualización: <span class="fill">17 de julio de 2026</span> · Contacto: <span class="fill">alejitomg28@gmail.com</span></p>
+
+  <p>
+    Orchest es un agente local-first: la mayoría de lo que hacés con él vive únicamente
+    en tu computadora. Esta página explica, sin vueltas, qué datos existen, dónde viven,
+    y qué sale de tu máquina — y qué no.
+  </p>
+
+  <h2>Lo que nunca sale de tu computadora</h2>
+  <div class="card local">
+    <p>Guardado localmente en tu propia base de datos (SQLite), en tu disco:</p>
+    <ul>
+      <li>Grabaciones de voz y transcripciones</li>
+      <li>Tus tareas, pendientes y sesiones de foco</li>
+      <li>Tu historial de conversación con Orchest</li>
+      <li>Tu memoria semántica (recuerdos vectorizados de conversaciones pasadas)</li>
+      <li>El mapa que conecta cada nombre/dato tokenizado con la persona o lugar real</li>
+    </ul>
+    <p><strong>Nosotros (los creadores de Orchest) no tenemos acceso a nada de esto.</strong> No existe un servidor nuestro donde esta información se almacene o se pueda consultar.</p>
+  </div>
+
+  <h2>Lo que sí puede salir — y bajo qué condición</h2>
+  <div class="card cloud">
+    <p><strong>Razonamiento en la nube (opcional).</strong> Si elegís un proveedor de IA en la nube (OpenAI o Anthropic) en vez del modo local, Orchest redacta el texto antes de enviarlo: nombres, correos, teléfonos y ubicaciones se reemplazan por etiquetas anónimas (<code>&lt;PERSON_1&gt;</code>, <code>&lt;EMAIL_1&gt;</code>, etc.). El mapa que traduce esas etiquetas de vuelta a datos reales nunca sale de tu máquina.</p>
+  </div>
+  <div class="card cloud">
+    <p><strong>Google Calendar (opcional).</strong> Si conectás tu calendario, Orchest le pide a Google, con permiso de solo lectura, tus próximos eventos. El token de esa conexión se guarda cifrado en el llavero de tu sistema operativo, nunca en un servidor nuestro. Podés desconectarlo cuando quieras.</p>
+  </div>
+  <div class="card cloud">
+    <p><strong>Tu cuenta en orchest.info (obligatorio para registrarte).</strong> Si creás una cuenta en la web pública, tu correo y contraseña se guardan en Supabase (nuestro proveedor de autenticación), de forma independiente y sin conexión a lo que hacés con tu Orchest local. Esa cuenta sirve para identificarte y, más adelante, para gestionar tu plan — nunca para ver tus tareas, tu voz o tus conversaciones, que Orchest ni siquiera nos transmite.</p>
+  </div>
+
+  <h2>Lo que jamás recolectamos</h2>
+  <ul>
+    <li>No hay rastreo ni analítica en esta web pública — es un sitio estático, sin scripts de terceros.</li>
+    <li>No vendemos ni compartimos datos con anunciantes.</li>
+    <li>No entrenamos ningún modelo de IA con tu contenido.</li>
+  </ul>
+
+  <h2>Tus derechos</h2>
+  <p>
+    Podés borrar tus datos locales en cualquier momento (son un archivo en tu disco).
+    Podés pedirnos eliminar tu cuenta de orchest.info escribiendo a
+    <span class="fill">alejitomg28@gmail.com</span>. Si sos residente de la Unión Europea
+    u otra jurisdicción con derechos de protección de datos reconocidos, esos derechos
+    (acceso, rectificación, portabilidad, olvido) aplican sobre los datos que sí tenemos
+    — es decir, los de tu cuenta, no los de tu uso local de Orchest, que no vemos.
+  </p>
+
+  <h2>Menores de edad</h2>
+  <p>Orchest no está dirigido a menores de 13 años y no recolectamos intencionalmente datos de cuentas de menores de esa edad.</p>
+
+  <h2>Cambios a esta política</h2>
+  <p>Si esta política cambia de forma significativa, lo vamos a anunciar en esta misma página y, cuando sea razonable, por correo a las cuentas registradas.</p>
+
+  <h2>Contacto</h2>
+  <p>Preguntas sobre privacidad: <span class="fill">alejitomg28@gmail.com</span></p>
+</div>
+</body>
+</html>
