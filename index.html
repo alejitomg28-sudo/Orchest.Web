@@ -1494,6 +1494,7 @@
     setDownloadButtonsState("Descargando…", true);
 
     fetch(SUPABASE_URL + RELEASE_PATH, {
+      cache: "no-store",
       headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + session.access_token },
     })
       .then(function (res) {
