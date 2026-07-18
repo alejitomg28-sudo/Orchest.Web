@@ -332,6 +332,30 @@
 
   .account-card input:disabled { opacity: 0.5; }
 
+  .account-terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    text-align: left;
+    margin: 2px 0 16px;
+  }
+
+  .account-terms input { width: auto; margin: 2px 0 0; }
+  .account-terms a { color: var(--accent); }
+
+  .account-message {
+    font-size: 0.86rem;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 0 0 14px;
+    text-align: left;
+  }
+
+  .account-message.is-error { background: rgba(209, 97, 79, 0.12); color: #d1614f; }
+  .account-message.is-success { background: rgba(76, 175, 125, 0.12); color: #4caf7d; }
+
   /* --- Footer manifesto ------------------------------------------------------ */
 
   footer.manifesto {
@@ -844,13 +868,19 @@
 
   <section id="cuenta" class="reveal">
     <h2>Tu cuenta</h2>
-    <p class="section-sub">Esta sección todavía no está conectada — es un adelanto de cómo va a verse.</p>
+    <p class="section-sub">Creá tu cuenta para reservar tu lugar y gestionar tu plan más adelante.</p>
     <div class="account-card">
       <h3>Creá tu cuenta</h3>
-      <p>Muy pronto vas a poder registrarte acá para descargar Orchest y gestionar tu plan.</p>
-      <input type="email" placeholder="tu@correo.com" disabled>
-      <input type="password" placeholder="Contraseña" disabled>
-      <button class="btn btn-primary" style="width:100%;" disabled>Próximamente</button>
+      <p id="authMessage" class="account-message" hidden></p>
+      <form id="authForm" novalidate>
+        <input type="email" id="authEmail" placeholder="tu@correo.com" required autocomplete="email">
+        <input type="password" id="authPassword" placeholder="Contraseña (mínimo 6 caracteres)" required minlength="6" autocomplete="new-password">
+        <label class="account-terms">
+          <input type="checkbox" id="authTerms">
+          <span>Acepto los Términos y Condiciones</span>
+        </label>
+        <button class="btn btn-primary" type="submit" id="authSubmit" style="width:100%;">Crear cuenta</button>
+      </form>
     </div>
   </section>
 
@@ -1088,6 +1118,109 @@
       }
     });
   }
+})();
+
+// --- Cuenta: registro vía Supabase Auth (BaaS, sin backend propio) ----------
+//
+// Sin servidor propio a propósito: el daemon de Orchest es local y privado,
+// una isla por usuario — no puede (ni debe) ser el backend de registro de la
+// web pública. En vez de levantar un servidor nuevo solo para esto, el JS le
+// habla directo a la API REST de Supabase Auth. La "anon public key" de acá
+// abajo está pensada por Supabase para vivir en el cliente — la seguridad
+// real la da Row Level Security en su base, no ocultar esta clave. NUNCA
+// pongas acá la "service_role key" (esa sí es secreta y nunca va en el cliente).
+
+(function initAuth() {
+  // Reemplazá estos dos valores por los de tu propio proyecto:
+  // supabase.com -> tu proyecto -> Project Settings -> API.
+  var SUPABASE_URL = "https://pimtrskhfkmamagjmmba.supabase.co";
+  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBpbXRyc2toZmttYW1hZ2ptbWJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQzMzEzOTIsImV4cCI6MjA5OTkwNzM5Mn0.5Y3wRgbbm7LukA1lPNSY2-ajMhQGhJjr-qsLV8FwFRE";
+
+  var form = document.getElementById("authForm");
+  if (!form) return;
+
+  var emailInput = document.getElementById("authEmail");
+  var passwordInput = document.getElementById("authPassword");
+  var termsInput = document.getElementById("authTerms");
+  var submitBtn = document.getElementById("authSubmit");
+  var message = document.getElementById("authMessage");
+
+  function showMessage(text, kind) {
+    message.textContent = text;
+    message.className = "account-message is-" + kind;
+    message.hidden = false;
+  }
+
+  function friendlyError(body, status) {
+    var raw = (body && (body.error_description || body.msg || body.error || body.message)) || "";
+    var lower = raw.toLowerCase();
+    if (lower.indexOf("already registered") !== -1 || lower.indexOf("already exists") !== -1) {
+      return "Ese correo ya tiene una cuenta creada.";
+    }
+    if (lower.indexOf("password") !== -1) {
+      return "La contraseña no es válida — probá con al menos 6 caracteres.";
+    }
+    if (lower.indexOf("email") !== -1 && lower.indexOf("invalid") !== -1) {
+      return "Ese correo no parece válido.";
+    }
+    if (status === 0) {
+      return "No se pudo conectar. Revisá tu conexión e intentá de nuevo.";
+    }
+    return "No se pudo crear la cuenta. Intentá de nuevo en un momento.";
+  }
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    message.hidden = true;
+
+    if (!termsInput.checked) {
+      showMessage("Tenés que aceptar los Términos y Condiciones para continuar.", "error");
+      return;
+    }
+    if (passwordInput.value.length < 6) {
+      showMessage("La contraseña necesita al menos 6 caracteres.", "error");
+      return;
+    }
+    if (SUPABASE_URL.indexOf("TU-PROYECTO") !== -1) {
+      showMessage("Cuenta todavía no configurada — volvé pronto.", "error");
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Creando cuenta…";
+
+    fetch(SUPABASE_URL + "/auth/v1/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: SUPABASE_ANON_KEY,
+      },
+      body: JSON.stringify({
+        email: emailInput.value.trim(),
+        password: passwordInput.value,
+      }),
+    })
+      .then(function (res) {
+        return res.json().then(function (body) {
+          return { ok: res.ok, status: res.status, body: body };
+        });
+      })
+      .then(function (result) {
+        if (!result.ok) {
+          showMessage(friendlyError(result.body, result.status), "error");
+          return;
+        }
+        showMessage("¡Cuenta creada! Revisá tu correo para confirmarla.", "success");
+        form.reset();
+      })
+      .catch(function () {
+        showMessage(friendlyError(null, 0), "error");
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Crear cuenta";
+      });
+  });
 })();
 </script>
 </body>
