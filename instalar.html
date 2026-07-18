@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orchest — Instalar</title>
+<style>
+  :root {
+    --bg: #0e0f13; --bg-card: #1c1e26; --text: #ece7da; --text-secondary: #9b9686;
+    --accent: #d99a4e; --rule: rgba(236,231,218,0.14);
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f6f1e7; --bg-card: #ffffff; --text: #211f1a; --text-secondary: #6b6558;
+      --accent: #a8672a; --rule: rgba(33,31,26,0.14);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 40px 24px 80px; }
+  a { color: var(--accent); }
+  .back { display: inline-block; margin-bottom: 24px; color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; }
+  .back:hover { color: var(--text); }
+  h1 { font-size: 1.8rem; margin: 0 0 8px; }
+  .sub { color: var(--text-secondary); font-size: 0.94rem; margin: 0 0 40px; }
+
+  .step {
+    display: flex;
+    gap: 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  .step-num {
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(217, 154, 78, 0.15);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .step h3 { margin: 4px 0 6px; font-size: 1.02rem; }
+  .step p { margin: 0; color: var(--text-secondary); font-size: 0.92rem; }
+  .step .note {
+    margin-top: 10px;
+    font-size: 0.86rem;
+    padding: 10px 12px;
+    background: rgba(217, 154, 78, 0.08);
+    border: 1px solid rgba(217, 154, 78, 0.2);
+    border-radius: 8px;
+    color: var(--text);
+  }
+
+  code {
+    background: rgba(217, 154, 78, 0.12);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+  }
+
+  .final {
+    text-align: center;
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .final p { color: var(--text-secondary); font-size: 0.92rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html#cuenta">← Volver a Orchest</a>
+  <h1>Instalar Orchest</h1>
+  <p class="sub">Cinco pasos, sin terminal. Cinco minutos, más o menos.</p>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div>
+      <h3>Descomprimí el archivo</h3>
+      <p>Buscá <code>Orchest-Alpha.zip</code> en tu carpeta de Descargas y hacé doble clic para descomprimirlo.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div>
+      <h3>Arrastrá Orchest a Aplicaciones</h3>
+      <p>Arrastrá <code>Orchest.app</code> a tu carpeta de Aplicaciones, como cualquier otro programa de Mac.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div>
+      <h3>La primera vez: clic derecho → Abrir</h3>
+      <p>
+        Abrí Aplicaciones, hacé <strong>clic derecho sobre Orchest</strong> y elegí
+        <strong>Abrir</strong> (en vez de doble clic normal). macOS te va a preguntar
+        si estás seguro — decí que sí.
+      </p>
+      <p class="note">
+        Si aun así aparece bloqueado: andá a <strong>Ajustes del Sistema → Privacidad
+        y seguridad</strong>, bajá hasta el mensaje sobre Orchest, y tocá
+        <strong>"Abrir de todos modos"</strong>.
+      </p>
+      <p class="note">
+        ¿Por qué pasa esto? Orchest todavía es una versión Alpha sin la firma
+        paga de Apple. El programa corre 100% en tu máquina — este aviso es
+        solo el chequeo estándar de macOS para software nuevo, no una señal de
+        que algo esté mal.
+      </p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div>
+      <h3>Permití el micrófono</h3>
+      <p>Cuando Orchest te lo pida, aceptá el acceso al micrófono — es lo que le permite escucharte.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div>
+      <h3>Abrí tu Hogar</h3>
+      <p>
+        Buscá el ícono de Orchest en la barra de menú (arriba a la derecha) y
+        tocá el botón de engranaje ⚙️ — se abre <strong>tu Hogar</strong>: el
+        panel privado donde vas a ver tus pendientes, tu calendario y tus ajustes.
+      </p>
+    </div>
+  </div>
+
+  <div class="final">
+    <p>¿Algo no funcionó como esperabas? Escribinos a <a href="mailto:alejitomg28@gmail.com">alejitomg28@gmail.com</a>.</p>
+  </div>
+</div>
+</body>
+</html>
