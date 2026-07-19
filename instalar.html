@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Orchest — Instalar</title>
 <style>
+  .lang-switch { position: absolute; top: 40px; right: 24px; display: inline-flex; border: 1px solid rgba(236,231,218,0.14); border-radius: 999px; overflow: hidden; }
+  .lang-btn { background: transparent; border: none; color: #9b9686; font-size: 0.78rem; font-weight: 600; padding: 5px 10px; cursor: pointer; }
+  .lang-btn.active { background: #d99a4e; color: #14151b; }
+</style>
+<style>
   :root {
     --bg: #0e0f13; --bg-card: #1c1e26; --text: #ece7da; --text-secondary: #9b9686;
     --accent: #d99a4e; --rule: rgba(236,231,218,0.14);
@@ -82,42 +87,46 @@
 </style>
 </head>
 <body>
-<div class="wrap">
-  <a class="back" href="index.html#cuenta">← Volver a Orchest</a>
-  <h1>Instalar Orchest</h1>
-  <p class="sub">Cinco pasos, sin terminal. Cinco minutos, más o menos.</p>
+<div class="wrap" style="position: relative;">
+  <span class="lang-switch">
+    <button type="button" class="lang-btn" data-lang="es">ES</button>
+    <button type="button" class="lang-btn" data-lang="en">EN</button>
+  </span>
+  <a class="back" href="index.html#cuenta" data-i18n="back">← Volver a Orchest</a>
+  <h1 data-i18n="title">Instalar Orchest</h1>
+  <p class="sub" data-i18n="subtitle">Cinco pasos, sin terminal. Cinco minutos, más o menos.</p>
 
   <div class="step">
     <div class="step-num">1</div>
     <div>
-      <h3>Descomprimí el archivo</h3>
-      <p>Buscá <code>Orchest-Alpha.zip</code> en tu carpeta de Descargas y hacé doble clic para descomprimirlo.</p>
+      <h3 data-i18n="step1title">Descomprime el archivo</h3>
+      <p data-i18n="step1text">Busca <code>Orchest-Alpha.zip</code> en tu carpeta de Descargas y haz doble clic para descomprimirlo.</p>
     </div>
   </div>
 
   <div class="step">
     <div class="step-num">2</div>
     <div>
-      <h3>Arrastrá Orchest a Aplicaciones</h3>
-      <p>Arrastrá <code>Orchest.app</code> a tu carpeta de Aplicaciones, como cualquier otro programa de Mac.</p>
+      <h3 data-i18n="step2title">Arrastra Orchest a Aplicaciones</h3>
+      <p data-i18n="step2text">Arrastra <code>Orchest.app</code> a tu carpeta de Aplicaciones, como cualquier otro programa de Mac.</p>
     </div>
   </div>
 
   <div class="step">
     <div class="step-num">3</div>
     <div>
-      <h3>La primera vez: clic derecho → Abrir</h3>
-      <p>
-        Abrí Aplicaciones, hacé <strong>clic derecho sobre Orchest</strong> y elegí
+      <h3 data-i18n="step3title">La primera vez: clic derecho → Abrir</h3>
+      <p data-i18n="step3text">
+        Abre Aplicaciones, haz <strong>clic derecho sobre Orchest</strong> y elige
         <strong>Abrir</strong> (en vez de doble clic normal). macOS te va a preguntar
-        si estás seguro — decí que sí.
+        si estás seguro — di que sí.
       </p>
-      <p class="note">
-        Si aun así aparece bloqueado: andá a <strong>Ajustes del Sistema → Privacidad
-        y seguridad</strong>, bajá hasta el mensaje sobre Orchest, y tocá
+      <p class="note" data-i18n="step3note1">
+        Si aun así aparece bloqueado: ve a <strong>Ajustes del Sistema → Privacidad
+        y seguridad</strong>, baja hasta el mensaje sobre Orchest, y toca
         <strong>"Abrir de todos modos"</strong>.
       </p>
-      <p class="note">
+      <p class="note" data-i18n="step3note2">
         ¿Por qué pasa esto? Orchest todavía es una versión Alpha sin la firma
         paga de Apple. El programa corre 100% en tu máquina — este aviso es
         solo el chequeo estándar de macOS para software nuevo, no una señal de
@@ -129,26 +138,99 @@
   <div class="step">
     <div class="step-num">4</div>
     <div>
-      <h3>Permití el micrófono</h3>
-      <p>Cuando Orchest te lo pida, aceptá el acceso al micrófono — es lo que le permite escucharte.</p>
+      <h3 data-i18n="step4title">Permite el micrófono</h3>
+      <p data-i18n="step4text">Cuando Orchest te lo pida, acepta el acceso al micrófono — es lo que le permite escucharte.</p>
     </div>
   </div>
 
   <div class="step">
     <div class="step-num">5</div>
     <div>
-      <h3>Abrí tu Hogar</h3>
-      <p>
-        Buscá el ícono de Orchest en la barra de menú (arriba a la derecha) y
-        tocá el botón de engranaje ⚙️ — se abre <strong>tu Hogar</strong>: el
+      <h3 data-i18n="step5title">Abre tu Hogar</h3>
+      <p data-i18n="step5text">
+        Busca el ícono de Orchest en la barra de menú (arriba a la derecha) y
+        toca el botón de engranaje ⚙️ — se abre <strong>tu Hogar</strong>: el
         panel privado donde vas a ver tus pendientes, tu calendario y tus ajustes.
       </p>
     </div>
   </div>
 
   <div class="final">
-    <p>¿Algo no funcionó como esperabas? Escribinos a <a href="mailto:alejitomg28@gmail.com">alejitomg28@gmail.com</a>.</p>
+    <p data-i18n="final">¿Algo no funcionó como esperabas? Escríbenos a <a href="mailto:alejitomg28@gmail.com">alejitomg28@gmail.com</a>.</p>
   </div>
 </div>
+<script>
+"use strict";
+(function () {
+  var EN = {
+    back: "← Back to Orchest",
+    title: "Install Orchest",
+    subtitle: "Five steps, no terminal. Five minutes, give or take.",
+    step1title: "Unzip the file",
+    step1text: 'Find <code>Orchest-Alpha.zip</code> in your Downloads folder and double-click to unzip it.',
+    step2title: "Drag Orchest to Applications",
+    step2text: 'Drag <code>Orchest.app</code> to your Applications folder, like any other Mac app.',
+    step3title: "The first time: right-click → Open",
+    step3text:
+      "Open Applications, <strong>right-click on Orchest</strong> and choose " +
+      "<strong>Open</strong> (instead of a normal double-click). macOS will ask if " +
+      "you're sure — say yes.",
+    step3note1:
+      'If it still shows as blocked: go to <strong>System Settings → Privacy ' +
+      "and Security</strong>, scroll down to the message about Orchest, and tap " +
+      '<strong>"Open Anyway"</strong>.',
+    step3note2:
+      "Why does this happen? Orchest is still an Alpha version without Apple's " +
+      "paid signature. The app runs 100% on your machine — this warning is just " +
+      "macOS's standard check for new software, not a sign that something's wrong.",
+    step4title: "Allow the microphone",
+    step4text: "When Orchest asks, allow microphone access — that's what lets it hear you.",
+    step5title: "Open your Home",
+    step5text:
+      "Find the Orchest icon in the menu bar (top right) and tap the gear " +
+      "icon ⚙️ — that opens <strong>your Home</strong>: the private panel where " +
+      "you'll see your tasks, calendar, and settings.",
+    final: 'Something not working as expected? Write to us at <a href="mailto:alejitomg28@gmail.com">alejitomg28@gmail.com</a>.',
+  };
+
+  var ES = {};
+  document.querySelectorAll("[data-i18n]").forEach(function (el) {
+    ES[el.getAttribute("data-i18n")] = el.innerHTML;
+  });
+
+  function applyLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      var value = lang === "en" ? EN[key] : ES[key];
+      if (value !== undefined) el.innerHTML = value;
+    });
+    document.querySelectorAll(".lang-btn").forEach(function (btn) {
+      btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+  }
+
+  document.querySelectorAll(".lang-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      try {
+        localStorage.setItem("orchestLang", btn.dataset.lang);
+      } catch (e) {
+        /* private mode — the choice just won't persist */
+      }
+      applyLang(btn.dataset.lang);
+    });
+  });
+
+  var saved = null;
+  try {
+    saved = localStorage.getItem("orchestLang");
+  } catch (e) {
+    /* private mode */
+  }
+  var nav = (navigator.language || "es").toLowerCase();
+  var initial = saved === "en" || saved === "es" ? saved : nav.indexOf("en") === 0 ? "en" : "es";
+  applyLang(initial);
+})();
+</script>
 </body>
 </html>

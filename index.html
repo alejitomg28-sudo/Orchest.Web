@@ -63,6 +63,26 @@
 
   header.top nav a:hover { color: var(--text); }
 
+  .lang-switch {
+    display: inline-flex;
+    margin-left: 24px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .lang-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .lang-btn.active { background: var(--accent); color: var(--accent-text, #14151b); }
+
   /* --- Hero ------------------------------------------------------------ */
 
   .hero {
@@ -575,17 +595,6 @@
 
   .demo-phrase-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-  .demo-input {
-    width: 100%;
-    background: var(--bg);
-    border: 1px solid var(--rule);
-    color: var(--text);
-    border-radius: 8px;
-    padding: 10px 12px;
-    font-size: 0.88rem;
-    margin-bottom: 24px;
-  }
-
   .demo-mic-row {
     display: flex;
     align-items: center;
@@ -685,11 +694,15 @@
   <header class="top">
     <div class="logo">Orchest</div>
     <nav>
-      <a href="#producto">Producto</a>
-      <a href="#seccion-demo">Cómo funciona</a>
-      <a href="#seccion-privacidad">Privacidad</a>
-      <a href="#planes">Planes</a>
-      <a href="#cuenta">Cuenta</a>
+      <a href="#producto" data-i18n="nav.product">Producto</a>
+      <a href="#seccion-demo" data-i18n="nav.howitworks">Cómo funciona</a>
+      <a href="#seccion-privacidad" data-i18n="nav.privacy">Privacidad</a>
+      <a href="#planes" data-i18n="nav.plans">Planes</a>
+      <a href="#cuenta" data-i18n="nav.account">Cuenta</a>
+      <span class="lang-switch">
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </span>
     </nav>
   </header>
 
@@ -705,23 +718,23 @@
         <rect x="65" y="10" width="6" height="20" rx="3"></rect>
         <rect x="78" y="14" width="6" height="12" rx="3"></rect>
       </svg>
-      <h1>Tu día, orquestado.<br>Sin que un byte salga de tu máquina.</h1>
-      <p class="tagline">
+      <h1 data-i18n="hero.title">Tu día, orquestado.<br>Sin que un byte salga de tu máquina.</h1>
+      <p class="tagline" data-i18n="hero.tagline">
         Un agente por voz que vive en tu computadora — te habla cuando algo importa
         y se calla cuando no.
       </p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="#cuenta" id="heroDownloadBtn">Descargar para Mac (Alpha)</a>
-        <a class="btn btn-secondary" href="#seccion-demo">Ver cómo funciona</a>
+        <a class="btn btn-primary" href="#cuenta" id="heroDownloadBtn" data-i18n="hero.download">Descargar para Mac (Alpha)</a>
+        <a class="btn btn-secondary" href="#seccion-demo" data-i18n="hero.seehow">Ver cómo funciona</a>
       </div>
       <div class="cta-row" style="margin-top: 10px;">
-        <button type="button" class="btn btn-disabled btn-sm" disabled>Windows y Linux — próximamente</button>
+        <button type="button" class="btn btn-disabled btn-sm" disabled data-i18n="hero.winlinux">Windows y Linux — próximamente</button>
       </div>
     </div>
   </section>
 
   <section class="problema reveal">
-    <p>
+    <p data-i18n="problema.text">
       Los asistentes de hoy o te <strong>bombardean</strong>, o se quedan
       <strong>mudos</strong>. Y los que "entienden todo" es porque
       <strong>leen todo</strong>.
@@ -730,17 +743,19 @@
 
   <!-- SLOT: demo interactiva -->
   <section id="seccion-demo" class="reveal">
-    <h2>Probalo, sin instalar nada</h2>
-    <p class="section-sub">Una simulación fiel de lo que pasa en tu Mac cuando le hablás a Orchest.</p>
+    <h2 data-i18n="demo.title">Probalo, sin instalar nada</h2>
+    <p class="section-sub" data-i18n="demo.subtitle">Una simulación fiel de lo que pasa en tu Mac cuando le hablas a Orchest.</p>
 
     <div class="demo-stage">
-      <div class="demo-step-label">1. Elegí una frase (o escribí la tuya)</div>
+      <div class="demo-step-label" data-i18n="demo.step1">1. Elige una frase</div>
       <div class="demo-phrases">
-        <button class="demo-phrase-btn" type="button" data-phrase="Llamar a Roberto sobre la reunión en Central Park">"Llamar a Roberto sobre la reunión…"</button>
-        <button class="demo-phrase-btn" type="button" data-phrase="Recordarme enviar el informe a maria.gomez@empresa.com mañana">"Recordarme enviar el informe…"</button>
-        <button class="demo-phrase-btn" type="button" data-phrase="Agendar café con Valentina el viernes">"Agendar café con Valentina el viernes"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Llamar a Roberto sobre la reunión en Central Park" data-phrase-en="Call Roberto about the meeting in Central Park" data-i18n="demo.btn1">"Llamar a Roberto sobre la reunión…"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Recordarme enviar el informe a maria.gomez@empresa.com mañana" data-phrase-en="Remind me to send the report to maria.gomez@company.com tomorrow" data-i18n="demo.btn2">"Recordarme enviar el informe…"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Agendar café con Valentina el viernes" data-phrase-en="Schedule coffee with Valentina on Friday" data-i18n="demo.btn3">"Agendar café con Valentina el viernes"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Guardarle el teléfono a Fernanda: 55 1234 5678" data-phrase-en="Save Fernanda's phone number: 55 1234 5678" data-i18n="demo.btn4">"Guardarle el teléfono a Fernanda…"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Reservar mesa para cenar con Diego y Camila en Polanco el sábado" data-phrase-en="Book a dinner table with Diego and Camila in Polanco on Saturday" data-i18n="demo.btn5">"Reservar mesa con Diego y Camila…"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Enviar el contrato a diego.ramirez@constructora.mx antes del jueves" data-phrase-en="Send the contract to diego.ramirez@constructora.mx before Thursday" data-i18n="demo.btn6">"Enviar el contrato antes del jueves…"</button>
       </div>
-      <input type="text" id="demoCustomPhrase" class="demo-input" placeholder="…o escribí la tuya y presioná Enter">
 
       <div class="demo-mic-row">
         <svg class="demo-wave" id="demoWave" viewBox="0 0 84 40" width="52" height="26" aria-hidden="true">
@@ -752,16 +767,16 @@
           <rect x="65" y="10" width="6" height="20" rx="3"></rect>
           <rect x="78" y="14" width="6" height="12" rx="3"></rect>
         </svg>
-        <p class="demo-transcript" id="demoTranscript">Elegí una frase arriba para empezar…</p>
+        <p class="demo-transcript" id="demoTranscript" data-i18n="demo.transcriptPlaceholder">Elige una frase arriba para empezar…</p>
       </div>
 
       <div class="demo-redaction" id="demoRedaction" hidden>
-        <div class="demo-redaction-label">2. Esto es lo único que saldría de tu máquina</div>
+        <div class="demo-redaction-label" data-i18n="demo.step2">2. Esto es lo único que saldría de tu máquina</div>
         <p class="demo-redacted-text" id="demoRedactedText"></p>
       </div>
 
       <div class="demo-result" id="demoResult" hidden>
-        <div class="demo-redaction-label">3. Orchest actúa</div>
+        <div class="demo-redaction-label" data-i18n="demo.step3">3. Orchest actúa</div>
         <div class="demo-task-card" id="demoTaskCard">
           <div class="demo-task-title"></div>
           <div class="demo-task-meta"></div>
@@ -769,59 +784,59 @@
       </div>
 
       <div class="demo-closing" id="demoClosing" hidden>
-        <p>
-          Esto que acabás de ver es una simulación fiel del flujo real — no está conectado
+        <p data-i18n="demo.closing">
+          Esto que acabas de ver es una simulación fiel del flujo real — no está conectado
           a tu voz ni a ningún servidor. En tu Mac, pasa así, con tu voz de verdad.
         </p>
-        <a class="btn btn-primary" href="#cuenta">Descargar Orchest</a>
+        <a class="btn btn-primary" href="#cuenta" data-i18n="demo.closingBtn">Descargar Orchest</a>
       </div>
     </div>
   </section>
 
   <section class="reveal">
-    <h2>Por qué Orchest y no otra IA</h2>
-    <p class="section-sub">El diferencial no es qué integra. Es su postura.</p>
+    <h2 data-i18n="moat.title">Por qué Orchest y no otra IA</h2>
+    <p class="section-sub" data-i18n="moat.subtitle">El diferencial no es qué integra. Es su postura.</p>
     <div class="moat-grid">
       <div class="moat-card">
         <div class="icon">🔒</div>
-        <h3>Local-first de verdad</h3>
-        <p>Tu cerebro vive en tu máquina; nada sale sin redactar.</p>
+        <h3 data-i18n="moat.card1title">Local-first de verdad</h3>
+        <p data-i18n="moat.card1text">Tu cerebro vive en tu máquina; nada sale sin redactar.</p>
       </div>
       <div class="moat-card">
         <div class="icon">⚡</div>
-        <h3>Proactivo, no reactivo</h3>
-        <p>Te habla cuando algo urgente aparece — no esperás a preguntarle.</p>
+        <h3 data-i18n="moat.card2title">Proactivo, no reactivo</h3>
+        <p data-i18n="moat.card2text">Te habla cuando algo urgente aparece — no esperas a preguntarle.</p>
       </div>
       <div class="moat-card">
         <div class="icon">🎙️</div>
-        <h3>Voz + presencia constante</h3>
-        <p>Siempre está ahí; se invoca con una sola tecla.</p>
+        <h3 data-i18n="moat.card3title">Voz + presencia constante</h3>
+        <p data-i18n="moat.card3text">Siempre está ahí; se invoca con una sola tecla.</p>
       </div>
     </div>
   </section>
 
   <!-- SLOT: diagrama de privacidad -->
   <section id="seccion-privacidad" class="reveal">
-    <h2>La privacidad, mostrada — no prometida</h2>
-    <p class="section-sub">Antes de que una sola palabra viaje a la nube, esto es lo que pasa.</p>
+    <h2 data-i18n="priv.title">La privacidad, mostrada — no prometida</h2>
+    <p class="section-sub" data-i18n="priv.subtitle">Antes de que una sola palabra viaje a la nube, esto es lo que pasa.</p>
 
     <div class="priv-diagram">
       <div class="priv-zone priv-zone-local">
-        <div class="priv-zone-label">🔒 Tu Mac</div>
-        <div class="priv-chip">🎙️ Micrófono → Whisper local</div>
+        <div class="priv-zone-label" data-i18n="priv.yourmac">🔒 Tu Mac</div>
+        <div class="priv-chip" data-i18n="priv.chip1">🎙️ Micrófono → Whisper local</div>
         <div class="priv-chip">🗄️ SQLite</div>
-        <div class="priv-chip">🧠 Memoria vectorial</div>
-        <div class="priv-chip">🔑 Mapa de tokens</div>
+        <div class="priv-chip" data-i18n="priv.chip3">🧠 Memoria vectorial</div>
+        <div class="priv-chip" data-i18n="priv.chip4">🔑 Mapa de tokens</div>
       </div>
       <div class="priv-thread" aria-hidden="true">
-        <span class="priv-thread-label">solo texto ya redactado — opcional</span>
+        <span class="priv-thread-label" data-i18n="priv.threadLabel">solo texto ya redactado — opcional</span>
       </div>
       <div class="priv-zone priv-zone-cloud">
-        <div class="priv-zone-label">☁️ La nube</div>
+        <div class="priv-zone-label" data-i18n="priv.cloud">☁️ La nube</div>
       </div>
     </div>
 
-    <p class="priv-lockrow">
+    <p class="priv-lockrow" data-i18n="priv.lockrow">
       Esto nunca cruza:
       <span class="priv-lock">🔒 tu voz</span>
       <span class="priv-lock">🔒 tus nombres</span>
@@ -831,16 +846,16 @@
 
     <div class="priv-compare">
       <div class="priv-compare-col">
-        <div class="priv-compare-label">Vos dijiste</div>
-        <p>
+        <div class="priv-compare-label" data-i18n="priv.yousaid">Tú dijiste</div>
+        <p data-i18n="priv.saidtext">
           "llamar a <span class="priv-name">Roberto</span> sobre la reunión en
           <span class="priv-name">Central Park</span>, enviar el reporte a
           <span class="priv-name">maria.gomez@empresa.com</span>"
         </p>
       </div>
       <div class="priv-compare-col priv-compare-cloud">
-        <div class="priv-compare-label">La nube vio</div>
-        <p>
+        <div class="priv-compare-label" data-i18n="priv.cloudsaw">La nube vio</div>
+        <p data-i18n="priv.cloudsawtext">
           "llamar a <span class="priv-token">&lt;PERSON_1&gt;</span> sobre la reunión en
           <span class="priv-token">&lt;LOCATION_1&gt;</span>, enviar el reporte a
           <span class="priv-token">&lt;EMAIL_1&gt;</span>"
@@ -848,126 +863,303 @@
       </div>
     </div>
 
-    <p class="priv-closing">Apagá el WiFi. Orchest sigue funcionando.</p>
+    <p class="priv-closing" data-i18n="priv.closing">Apaga el WiFi. Orchest sigue funcionando.</p>
   </section>
 
   <section class="reveal">
-    <h2>Un recorrido rápido</h2>
-    <p class="section-sub">Así se ve Orchest todos los días — tu casa, no una consola técnica.</p>
+    <h2 data-i18n="tour.title">Un recorrido rápido</h2>
+    <p class="section-sub" data-i18n="tour.subtitle">Así se ve Orchest todos los días — tu casa, no una consola técnica.</p>
     <div class="tour-grid">
       <div class="tour-frame">
         <div class="chrome"><span></span><span></span><span></span></div>
-        <div class="shot"><!-- TODO: captura real de la pestaña Pendientes -->Pendientes</div>
-        <div class="label">Tus tareas, con prioridad a simple vista</div>
+        <div class="shot" data-i18n="tour.shot1"><!-- TODO: captura real de la pestaña Pendientes -->Pendientes</div>
+        <div class="label" data-i18n="tour.label1">Tus tareas, con prioridad a simple vista</div>
       </div>
       <div class="tour-frame">
         <div class="chrome"><span></span><span></span><span></span></div>
-        <div class="shot"><!-- TODO: captura real de la pestaña Calendario -->Calendario</div>
-        <div class="label">Tus eventos reales, agrupados por día</div>
+        <div class="shot" data-i18n="tour.shot2"><!-- TODO: captura real de la pestaña Calendario -->Calendario</div>
+        <div class="label" data-i18n="tour.label2">Tus eventos reales, agrupados por día</div>
       </div>
       <div class="tour-frame">
         <div class="chrome"><span></span><span></span><span></span></div>
-        <div class="shot"><!-- TODO: captura real del menubar --> ⌘ Menubar</div>
-        <div class="label">Siempre a un clic, sin abrir nada de más</div>
+        <div class="shot" data-i18n="tour.shot3"><!-- TODO: captura real del menubar --> ⌘ Menubar</div>
+        <div class="label" data-i18n="tour.label3">Siempre a un clic, sin abrir nada de más</div>
       </div>
     </div>
   </section>
 
   <section id="planes" class="reveal">
-    <h2>Planes</h2>
-    <p class="section-sub">
+    <h2 data-i18n="plans.title">Planes</h2>
+    <p class="section-sub" data-i18n="plans.subtitle">
       Construimos primero, tarifamos después — los precios de acá abajo todavía son
       orientativos mientras terminamos de dar forma al producto.
     </p>
     <div class="plans-grid">
       <div class="plan-card">
-        <h3>Día a día</h3>
-        <p class="price">Gratis</p>
+        <h3 data-i18n="plans.freeTitle">Día a día</h3>
+        <p class="price" data-i18n="plans.freePrice">Gratis</p>
         <ul>
-          <li>Recordatorios y tareas</li>
-          <li>Calendario visual</li>
-          <li>Voz en tu idioma</li>
+          <li data-i18n="plans.freeLi1">Recordatorios y tareas</li>
+          <li data-i18n="plans.freeLi2">Calendario visual</li>
+          <li data-i18n="plans.freeLi3">Voz en tu idioma</li>
         </ul>
-        <a class="btn btn-secondary" href="#cuenta" style="width:100%;text-align:center;">Empezar</a>
+        <a class="btn btn-secondary" href="#cuenta" style="width:100%;text-align:center;" data-i18n="plans.freeBtn">Empezar</a>
       </div>
       <div class="plan-card featured">
-        <h3>Personal Premium</h3>
-        <p class="price">Próximamente <span>/ mes</span></p>
+        <h3 data-i18n="plans.premiumTitle">Personal Premium</h3>
+        <p class="price" data-i18n="plans.premiumPrice">Próximamente <span>/ mes</span></p>
         <ul>
-          <li>Todo lo de Día a día</li>
-          <li>Ruteo consciente de presencia</li>
-          <li>Control fino de notificaciones</li>
+          <li data-i18n="plans.premiumLi1">Todo lo de Día a día</li>
+          <li data-i18n="plans.premiumLi2">Ruteo consciente de presencia</li>
+          <li data-i18n="plans.premiumLi3">Control fino de notificaciones</li>
         </ul>
-        <a class="btn btn-primary" href="#cuenta" style="width:100%;text-align:center;">Avisenme</a>
+        <a class="btn btn-primary" href="#cuenta" style="width:100%;text-align:center;" data-i18n="plans.premiumBtn">Avisenme</a>
       </div>
       <div class="plan-card">
-        <h3>Empresas</h3>
-        <p class="price">A medida</p>
+        <h3 data-i18n="plans.bizTitle">Empresas</h3>
+        <p class="price" data-i18n="plans.bizPrice">A medida</p>
         <ul>
-          <li>Slack → voz urgente</li>
-          <li>Compliance local-first</li>
-          <li>Auditoría exportable</li>
+          <li data-i18n="plans.bizLi1">Slack → voz urgente</li>
+          <li data-i18n="plans.bizLi2">Compliance local-first</li>
+          <li data-i18n="plans.bizLi3">Auditoría exportable</li>
         </ul>
-        <a class="btn btn-secondary" href="#cuenta" style="width:100%;text-align:center;">Hablemos</a>
+        <a class="btn btn-secondary" href="#cuenta" style="width:100%;text-align:center;" data-i18n="plans.bizBtn">Hablemos</a>
       </div>
     </div>
   </section>
 
   <section id="cuenta" class="reveal">
-    <h2>Tu cuenta</h2>
-    <p class="section-sub">Creá tu cuenta gratis para descargar Orchest y gestionar tu plan más adelante.</p>
+    <h2 data-i18n="account.title">Tu cuenta</h2>
+    <p class="section-sub" data-i18n="account.subtitle">Crea tu cuenta gratis para descargar Orchest y gestionar tu plan más adelante.</p>
     <div class="account-card">
 
       <!-- Vista: sesión iniciada -->
       <div id="accountLoggedIn" class="account-loggedin" hidden>
-        <h3>Hola, <span id="accountEmail"></span></h3>
-        <p>Ya tenés acceso a tu Hogar. Descargá Orchest cuando quieras.</p>
+        <h3 data-i18n="account.hello">Hola, <span id="accountEmail"></span></h3>
+        <p data-i18n="account.hasAccess">Ya tienes acceso a tu Hogar. Descarga Orchest cuando quieras.</p>
         <p id="downloadMessage" class="account-message" hidden></p>
-        <a class="btn btn-primary" href="instalar.html" id="accountDownloadBtn" style="width:100%;">Descargar para Mac (Alpha)</a>
-        <a class="btn btn-primary account-install-link" id="postDownloadLink" href="instalar.html" style="width:100%;">Seguir los pasos para instalarlo →</a>
+        <a class="btn btn-primary" href="instalar.html" id="accountDownloadBtn" style="width:100%;" data-i18n="hero.download">Descargar para Mac (Alpha)</a>
+        <a class="btn btn-primary account-install-link" id="postDownloadLink" href="instalar.html" style="width:100%;" data-i18n="account.followSteps">Seguir los pasos para instalarlo →</a>
         <div style="margin-top: 10px;">
-          <button type="button" class="btn btn-disabled btn-sm" disabled>Windows y Linux — próximamente</button>
+          <button type="button" class="btn btn-disabled btn-sm" disabled data-i18n="hero.winlinux">Windows y Linux — próximamente</button>
         </div>
-        <button type="button" class="btn btn-secondary" id="logoutBtn" style="width:100%; margin-top: 14px;">Cerrar sesión</button>
+        <button type="button" class="btn btn-secondary" id="logoutBtn" style="width:100%; margin-top: 14px;" data-i18n="account.logout">Cerrar sesión</button>
       </div>
 
       <!-- Vista: sin sesión -->
       <div id="accountLoggedOut">
         <div class="account-tabs">
-          <button type="button" class="account-tab active" data-tab="register">Crear cuenta</button>
-          <button type="button" class="account-tab" data-tab="login">Iniciar sesión</button>
+          <button type="button" class="account-tab active" data-tab="register" data-i18n="account.createTab">Crear cuenta</button>
+          <button type="button" class="account-tab" data-tab="login" data-i18n="account.loginTab">Iniciar sesión</button>
         </div>
 
         <p id="authMessage" class="account-message" hidden></p>
 
         <form id="authForm" novalidate>
-          <input type="email" id="authEmail" placeholder="tu@correo.com" required autocomplete="email">
-          <input type="password" id="authPassword" placeholder="Contraseña (mínimo 6 caracteres)" required minlength="6" autocomplete="new-password">
+          <input type="email" id="authEmail" placeholder="tu@correo.com" required autocomplete="email" data-i18n-ph="account.emailPh">
+          <input type="password" id="authPassword" placeholder="Contraseña (mínimo 6 caracteres)" required minlength="6" autocomplete="new-password" data-i18n-ph="account.passwordPh">
           <label class="account-terms">
             <input type="checkbox" id="authTerms">
-            <span>Acepto los <a href="terminos.html" target="_blank" rel="noopener">Términos y Condiciones</a> y la <a href="privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a></span>
+            <span data-i18n="account.termsLabel">Acepto los <a href="terminos.html" target="_blank" rel="noopener">Términos y Condiciones</a> y la <a href="privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a></span>
           </label>
-          <button class="btn btn-primary" type="submit" id="authSubmit" style="width:100%;">Crear cuenta</button>
+          <button class="btn btn-primary" type="submit" id="authSubmit" style="width:100%;" data-i18n="account.createTab">Crear cuenta</button>
         </form>
 
         <form id="loginForm" novalidate hidden>
-          <input type="email" id="loginEmail" placeholder="tu@correo.com" required autocomplete="email">
-          <input type="password" id="loginPassword" placeholder="Contraseña" required autocomplete="current-password">
-          <button class="btn btn-primary" type="submit" id="loginSubmit" style="width:100%;">Iniciar sesión</button>
+          <input type="email" id="loginEmail" placeholder="tu@correo.com" required autocomplete="email" data-i18n-ph="account.emailPh">
+          <input type="password" id="loginPassword" placeholder="Contraseña" required autocomplete="current-password" data-i18n-ph="account.passwordSimplePh">
+          <button class="btn btn-primary" type="submit" id="loginSubmit" style="width:100%;" data-i18n="account.loginTab">Iniciar sesión</button>
         </form>
       </div>
     </div>
   </section>
 
   <footer class="manifesto">
-    <p class="line">Creemos que tu atención es tuya. Orchest existe para defenderla.</p>
-    <p class="note">Orchest — un agente proactivo, local-first.</p>
-    <p class="note"><a href="terminos.html">Términos y Condiciones</a> · <a href="privacidad.html">Política de Privacidad</a></p>
+    <p class="line" data-i18n="footer.line">Creemos que tu atención es tuya. Orchest existe para defenderla.</p>
+    <p class="note" data-i18n="footer.note">Orchest — un agente proactivo, local-first.</p>
+    <p class="note"><a href="terminos.html" data-i18n="footer.terms">Términos y Condiciones</a> · <a href="privacidad.html" data-i18n="footer.privacy">Política de Privacidad</a></p>
   </footer>
 </div>
 
 <script>
 "use strict";
+
+// --- Idioma (ES por defecto — detección por navigator.language, sin
+// servicios externos de geolocalización: la propia página de privacidad
+// promete "sin scripts de terceros", así que la detección tiene que ser
+// 100% local) ------------------------------------------------------------
+
+(function initI18n() {
+  var EN = {
+    "nav.product": "Product",
+    "nav.howitworks": "How it works",
+    "nav.privacy": "Privacy",
+    "nav.plans": "Plans",
+    "nav.account": "Account",
+    "hero.title": "Your day, orchestrated.<br>Without a single byte leaving your machine.",
+    "hero.tagline":
+      "A voice agent that lives on your computer — it speaks up when something " +
+      "matters and stays quiet when it doesn't.",
+    "hero.download": "Download for Mac (Alpha)",
+    "hero.seehow": "See how it works",
+    "hero.winlinux": "Windows & Linux — coming soon",
+    "problema.text":
+      'Today\'s assistants either <strong>bombard</strong> you, or stay ' +
+      '<strong>silent</strong>. And the ones that "understand everything" do it ' +
+      "because they <strong>read everything</strong>.",
+    "demo.title": "Try it, no install required",
+    "demo.subtitle": "A faithful simulation of what happens on your Mac when you talk to Orchest.",
+    "demo.step1": "1. Choose a phrase",
+    "demo.btn1": '"Call Roberto about the meeting…"',
+    "demo.btn2": '"Remind me to send the report…"',
+    "demo.btn3": '"Schedule coffee with Valentina on Friday"',
+    "demo.btn4": '"Save Fernanda\'s phone number…"',
+    "demo.btn5": '"Book a table with Diego and Camila…"',
+    "demo.btn6": '"Send the contract before Thursday…"',
+    "demo.transcriptPlaceholder": "Choose a phrase above to start…",
+    "demo.step2": "2. This is the only thing that would leave your machine",
+    "demo.step3": "3. Orchest acts",
+    "demo.closing":
+      "What you just saw is a faithful simulation of the real flow — it's not " +
+      "connected to your voice or to any server. On your Mac, it happens just " +
+      "like this, with your real voice.",
+    "demo.closingBtn": "Download Orchest",
+    "moat.title": "Why Orchest, not another AI",
+    "moat.subtitle": "The difference isn't what it integrates. It's its posture.",
+    "moat.card1title": "Truly local-first",
+    "moat.card1text": "Your brain lives on your machine; nothing leaves without being redacted.",
+    "moat.card2title": "Proactive, not reactive",
+    "moat.card2text": "It speaks up when something urgent comes up — you don't wait to ask it.",
+    "moat.card3title": "Voice + constant presence",
+    "moat.card3text": "Always there; summoned with a single key.",
+    "priv.title": "Privacy, shown — not promised",
+    "priv.subtitle": "Before a single word travels to the cloud, this is what happens.",
+    "priv.yourmac": "🔒 Your Mac",
+    "priv.chip1": "🎙️ Microphone → local Whisper",
+    "priv.chip3": "🧠 Vector memory",
+    "priv.chip4": "🔑 Token map",
+    "priv.threadLabel": "only already-redacted text — optional",
+    "priv.cloud": "☁️ The cloud",
+    "priv.lockrow":
+      "This never crosses over: " +
+      '<span class="priv-lock">🔒 your voice</span>' +
+      '<span class="priv-lock">🔒 your names</span>' +
+      '<span class="priv-lock">🔒 your files</span>' +
+      '<span class="priv-lock">🔒 your calendar</span>',
+    "priv.yousaid": "You said",
+    "priv.saidtext":
+      '"call <span class="priv-name">Roberto</span> about the meeting in ' +
+      '<span class="priv-name">Central Park</span>, send the report to ' +
+      '<span class="priv-name">maria.gomez@empresa.com</span>"',
+    "priv.cloudsaw": "The cloud saw",
+    "priv.cloudsawtext":
+      '"call <span class="priv-token">&lt;PERSON_1&gt;</span> about the meeting in ' +
+      '<span class="priv-token">&lt;LOCATION_1&gt;</span>, send the report to ' +
+      '<span class="priv-token">&lt;EMAIL_1&gt;</span>"',
+    "priv.closing": "Turn off WiFi. Orchest keeps working.",
+    "tour.title": "A quick tour",
+    "tour.subtitle": "This is what Orchest looks like every day — your home, not a technical console.",
+    "tour.shot1": "Tasks",
+    "tour.label1": "Your tasks, with priority at a glance",
+    "tour.shot2": "Calendar",
+    "tour.label2": "Your real events, grouped by day",
+    "tour.shot3": " ⌘ Menu bar",
+    "tour.label3": "Always one click away, without opening anything extra",
+    "plans.title": "Plans",
+    "plans.subtitle":
+      "We're building first, pricing later — the prices below are still " +
+      "indicative while we finish shaping the product.",
+    "plans.freeTitle": "Day to day",
+    "plans.freePrice": "Free",
+    "plans.freeLi1": "Reminders and tasks",
+    "plans.freeLi2": "Visual calendar",
+    "plans.freeLi3": "Voice in your language",
+    "plans.freeBtn": "Get started",
+    "plans.premiumTitle": "Personal Premium",
+    "plans.premiumPrice": "Coming soon <span>/ month</span>",
+    "plans.premiumLi1": "Everything in Day to day",
+    "plans.premiumLi2": "Presence-aware routing",
+    "plans.premiumLi3": "Fine-grained notification control",
+    "plans.premiumBtn": "Notify me",
+    "plans.bizTitle": "Business",
+    "plans.bizPrice": "Custom",
+    "plans.bizLi1": "Slack → urgent voice alerts",
+    "plans.bizLi2": "Local-first compliance",
+    "plans.bizLi3": "Exportable audit trail",
+    "plans.bizBtn": "Let's talk",
+    "account.title": "Your account",
+    "account.subtitle": "Create your free account to download Orchest and manage your plan later.",
+    "account.hello": 'Hi, <span id="accountEmail"></span>',
+    "account.hasAccess": "You already have access to your Home. Download Orchest whenever you like.",
+    "account.followSteps": "Follow the install steps →",
+    "account.logout": "Log out",
+    "account.createTab": "Create account",
+    "account.loginTab": "Log in",
+    "account.termsLabel":
+      'I agree to the <a href="terminos.html" target="_blank" rel="noopener">Terms and Conditions</a> ' +
+      'and the <a href="privacidad.html" target="_blank" rel="noopener">Privacy Policy</a>',
+    "account.emailPh": "you@email.com",
+    "account.passwordPh": "Password (at least 6 characters)",
+    "account.passwordSimplePh": "Password",
+    "footer.line": "We believe your attention is yours. Orchest exists to defend it.",
+    "footer.note": "Orchest — a proactive, local-first agent.",
+    "footer.terms": "Terms and Conditions",
+    "footer.privacy": "Privacy Policy",
+  };
+
+  var I18N = { es: {}, en: EN };
+
+  document.querySelectorAll("[data-i18n]").forEach(function (el) {
+    I18N.es[el.getAttribute("data-i18n")] = el.innerHTML;
+  });
+  var esPlaceholders = {};
+  document.querySelectorAll("[data-i18n-ph]").forEach(function (el) {
+    esPlaceholders[el.getAttribute("data-i18n-ph")] = el.placeholder;
+  });
+
+  function detectLang() {
+    try {
+      var saved = localStorage.getItem("orchestLang");
+      if (saved === "en" || saved === "es") return saved;
+    } catch (e) {
+      /* private mode — fall through to detection */
+    }
+    var nav = (navigator.language || navigator.userLanguage || "es").toLowerCase();
+    return nav.indexOf("en") === 0 ? "en" : "es";
+  }
+
+  function applyLang(lang) {
+    window.ORCHEST_LANG = lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      var value = lang === "en" ? I18N.en[key] : I18N.es[key];
+      if (value !== undefined) el.innerHTML = value;
+    });
+    document.querySelectorAll("[data-i18n-ph]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n-ph");
+      var value = lang === "en" ? I18N.en[key] : esPlaceholders[key];
+      if (value !== undefined) el.placeholder = value;
+    });
+    document.querySelectorAll(".lang-btn").forEach(function (btn) {
+      btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+  }
+
+  document.querySelectorAll(".lang-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var lang = btn.dataset.lang;
+      try {
+        localStorage.setItem("orchestLang", lang);
+      } catch (e) {
+        /* private mode — the choice just won't persist across reloads */
+      }
+      applyLang(lang);
+    });
+  });
+
+  applyLang(detectLang());
+})();
 
 // --- Scroll reveal ---------------------------------------------------------
 
@@ -1040,69 +1232,88 @@
   var resultBox = document.getElementById("demoResult");
   var taskCard = document.getElementById("demoTaskCard");
   var closingBox = document.getElementById("demoClosing");
-  var customInput = document.getElementById("demoCustomPhrase");
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var PRESETS = {
     "Llamar a Roberto sobre la reunión en Central Park": {
-      redacted:
-        'Llamar a <span class="demo-token">&lt;PERSON_1&gt;</span> sobre la reunión en ' +
-        '<span class="demo-token">&lt;LOCATION_1&gt;</span>',
-      task: { title: "Llamar a Roberto", meta: "Sobre la reunión en Central Park", priority: "high" },
+      es: {
+        redacted:
+          'Llamar a <span class="demo-token">&lt;PERSON_1&gt;</span> sobre la reunión en ' +
+          '<span class="demo-token">&lt;LOCATION_1&gt;</span>',
+        task: { title: "Llamar a Roberto", meta: "Sobre la reunión en Central Park", priority: "high" },
+      },
+      en: {
+        redacted:
+          'Call <span class="demo-token">&lt;PERSON_1&gt;</span> about the meeting in ' +
+          '<span class="demo-token">&lt;LOCATION_1&gt;</span>',
+        task: { title: "Call Roberto", meta: "About the meeting in Central Park", priority: "high" },
+      },
     },
     "Recordarme enviar el informe a maria.gomez@empresa.com mañana": {
-      redacted:
-        'Recordarme enviar el informe a <span class="demo-token">&lt;EMAIL_1&gt;</span> mañana',
-      task: { title: "Enviar el informe", meta: "Vence: mañana", priority: "urgent" },
+      es: {
+        redacted:
+          'Recordarme enviar el informe a <span class="demo-token">&lt;EMAIL_1&gt;</span> mañana',
+        task: { title: "Enviar el informe", meta: "Vence: mañana", priority: "urgent" },
+      },
+      en: {
+        redacted:
+          'Remind me to send the report to <span class="demo-token">&lt;EMAIL_1&gt;</span> tomorrow',
+        task: { title: "Send the report", meta: "Due: tomorrow", priority: "urgent" },
+      },
     },
     "Agendar café con Valentina el viernes": {
-      redacted: 'Agendar café con <span class="demo-token">&lt;PERSON_1&gt;</span> el viernes',
-      task: { title: "Café con Valentina", meta: "El viernes", priority: "medium" },
+      es: {
+        redacted: 'Agendar café con <span class="demo-token">&lt;PERSON_1&gt;</span> el viernes',
+        task: { title: "Café con Valentina", meta: "El viernes", priority: "medium" },
+      },
+      en: {
+        redacted: 'Schedule coffee with <span class="demo-token">&lt;PERSON_1&gt;</span> on Friday',
+        task: { title: "Coffee with Valentina", meta: "On Friday", priority: "medium" },
+      },
+    },
+    "Guardarle el teléfono a Fernanda: 55 1234 5678": {
+      es: {
+        redacted:
+          'Guardarle el teléfono a <span class="demo-token">&lt;PERSON_1&gt;</span>: ' +
+          '<span class="demo-token">&lt;PHONE_1&gt;</span>',
+        task: { title: "Guardar teléfono de Fernanda", meta: "Nuevo contacto", priority: "low" },
+      },
+      en: {
+        redacted:
+          'Save <span class="demo-token">&lt;PERSON_1&gt;</span>\'s phone number: ' +
+          '<span class="demo-token">&lt;PHONE_1&gt;</span>',
+        task: { title: "Save Fernanda's number", meta: "New contact", priority: "low" },
+      },
+    },
+    "Reservar mesa para cenar con Diego y Camila en Polanco el sábado": {
+      es: {
+        redacted:
+          'Reservar mesa para cenar con <span class="demo-token">&lt;PERSON_1&gt;</span> y ' +
+          '<span class="demo-token">&lt;PERSON_2&gt;</span> en ' +
+          '<span class="demo-token">&lt;LOCATION_1&gt;</span> el sábado',
+        task: { title: "Cena con Diego y Camila", meta: "Sábado en Polanco", priority: "medium" },
+      },
+      en: {
+        redacted:
+          'Book a dinner table with <span class="demo-token">&lt;PERSON_1&gt;</span> and ' +
+          '<span class="demo-token">&lt;PERSON_2&gt;</span> in ' +
+          '<span class="demo-token">&lt;LOCATION_1&gt;</span> on Saturday',
+        task: { title: "Dinner with Diego and Camila", meta: "Saturday in Polanco", priority: "medium" },
+      },
+    },
+    "Enviar el contrato a diego.ramirez@constructora.mx antes del jueves": {
+      es: {
+        redacted:
+          'Enviar el contrato a <span class="demo-token">&lt;EMAIL_1&gt;</span> antes del jueves',
+        task: { title: "Enviar el contrato", meta: "Vence: jueves", priority: "urgent" },
+      },
+      en: {
+        redacted:
+          'Send the contract to <span class="demo-token">&lt;EMAIL_1&gt;</span> before Thursday',
+        task: { title: "Send the contract", meta: "Due: Thursday", priority: "urgent" },
+      },
     },
   };
-
-  function escapeHtml(str) {
-    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  }
-
-  function redactCustom(text) {
-    var emailRe = /[\w.+-]+@[\w-]+\.[a-z]{2,}/gi;
-    var chunks = [];
-    var lastIndex = 0;
-    var emailCount = 0;
-    var m;
-
-    while ((m = emailRe.exec(text)) !== null) {
-      chunks.push({ text: text.slice(lastIndex, m.index), isToken: false });
-      emailCount++;
-      chunks.push({ isToken: true, label: "EMAIL_" + emailCount });
-      lastIndex = emailRe.lastIndex;
-    }
-    chunks.push({ text: text.slice(lastIndex), isToken: false });
-
-    var personCount = 0;
-    var isFirstChunk = true;
-    return chunks
-      .map(function (chunk) {
-        if (chunk.isToken) {
-          return '<span class="demo-token">&lt;' + chunk.label + "&gt;</span>";
-        }
-        var words = chunk.text.split(/(\s+)/);
-        var out = words
-          .map(function (w, i) {
-            var isVeryFirstWord = isFirstChunk && i === 0;
-            if (!isVeryFirstWord && /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]{2,}$/.test(w)) {
-              personCount++;
-              return '<span class="demo-token">&lt;PERSON_' + personCount + "&gt;</span>";
-            }
-            return escapeHtml(w);
-          })
-          .join("");
-        isFirstChunk = false;
-        return out;
-      })
-      .join("");
-  }
 
   var pending = [];
   function clearPending() {
@@ -1113,7 +1324,7 @@
     pending = [];
   }
 
-  function runDemo(phrase) {
+  function runDemo(key, displayPhrase) {
     clearPending();
     redactionBox.hidden = true;
     resultBox.hidden = true;
@@ -1121,22 +1332,22 @@
     transcript.textContent = "";
 
     if (reduceMotion) {
-      transcript.textContent = phrase;
-      showRedaction(phrase);
+      transcript.textContent = displayPhrase;
+      showRedaction(key);
       return;
     }
 
     wave.classList.add("is-active");
     var i = 0;
     var typer = setInterval(function () {
-      transcript.textContent = phrase.slice(0, i + 1);
+      transcript.textContent = displayPhrase.slice(0, i + 1);
       i++;
-      if (i >= phrase.length) {
+      if (i >= displayPhrase.length) {
         clearInterval(typer);
         wave.classList.remove("is-active");
         pending.push(
           setTimeout(function () {
-            showRedaction(phrase);
+            showRedaction(key);
           }, 500)
         );
       }
@@ -1144,29 +1355,22 @@
     pending.push(typer);
   }
 
-  function showRedaction(phrase) {
-    var preset = PRESETS[phrase];
-    redactedText.innerHTML = preset ? preset.redacted : redactCustom(phrase);
+  function showRedaction(key) {
+    var preset = PRESETS[key][window.ORCHEST_LANG === "en" ? "en" : "es"];
+    redactedText.innerHTML = preset.redacted;
     redactionBox.hidden = false;
     pending.push(
       setTimeout(
         function () {
-          showResult(phrase);
+          showResult(key);
         },
         reduceMotion ? 0 : 1400
       )
     );
   }
 
-  function showResult(phrase) {
-    var preset = PRESETS[phrase];
-    var task = preset
-      ? preset.task
-      : {
-          title: phrase.length > 40 ? phrase.slice(0, 40) + "…" : phrase,
-          meta: "Agregado por voz",
-          priority: "medium",
-        };
+  function showResult(key) {
+    var task = PRESETS[key][window.ORCHEST_LANG === "en" ? "en" : "es"].task;
     taskCard.className = "demo-task-card priority-" + task.priority;
     taskCard.querySelector(".demo-task-title").textContent = task.title;
     taskCard.querySelector(".demo-task-meta").textContent = task.meta;
@@ -1183,17 +1387,11 @@
 
   stage.querySelectorAll(".demo-phrase-btn").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      runDemo(btn.dataset.phrase);
+      var displayPhrase =
+        window.ORCHEST_LANG === "en" ? btn.dataset.phraseEn : btn.dataset.phrase;
+      runDemo(btn.dataset.phrase, displayPhrase);
     });
   });
-
-  if (customInput) {
-    customInput.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" && customInput.value.trim()) {
-        runDemo(customInput.value.trim());
-      }
-    });
-  }
 })();
 
 // --- Cuenta: sesión + registro + login + descarga, vía Supabase (BaaS) ------
@@ -1210,7 +1408,7 @@
 // PRIVADO de Supabase Storage — solo una sesión autenticada puede pedirlo.
 
 (function initAccount() {
-  // Reemplazá estos dos valores por los de tu propio proyecto:
+  // Reemplaza estos dos valores por los de tu propio proyecto:
   // supabase.com -> tu proyecto -> Project Settings -> API.
   var SUPABASE_URL = "https://pimtrskhfkmamagjmmba.supabase.co";
   var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBpbXRyc2toZmttYW1hZ2ptbWJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQzMzEzOTIsImV4cCI6MjA5OTkwNzM5Mn0.5Y3wRgbbm7LukA1lPNSY2-ajMhQGhJjr-qsLV8FwFRE";
@@ -1235,6 +1433,66 @@
   var logoutBtn = document.getElementById("logoutBtn");
 
   var configured = SUPABASE_URL.indexOf("TU-PROYECTO") === -1;
+
+  var MSG = {
+    es: {
+      needTerms: "Tienes que aceptar los Términos y Condiciones para continuar.",
+      shortPassword: "La contraseña necesita al menos 6 caracteres.",
+      notConfigured: "Cuenta todavía no configurada — vuelve pronto.",
+      creatingAccount: "Creando cuenta…",
+      accountCreated: "¡Cuenta creada! Revisa tu correo para confirmarla, y después inicia sesión.",
+      createAccountBtn: "Crear cuenta",
+      loggingIn: "Iniciando sesión…",
+      loginBtn: "Iniciar sesión",
+      needAccountToDownload: "Crea tu cuenta gratis para descargar.",
+      notAvailableYet: "La descarga no está disponible todavía.",
+      downloading: "Descargando…",
+      downloadStarted: "¡Descarga iniciada!",
+      sessionExpired: "Tu sesión expiró — inicia sesión de nuevo.",
+      downloadFailed: "No se pudo descargar. Intenta de nuevo en un momento.",
+      connectionFailed: "No se pudo conectar. Revisa tu conexión.",
+      downloadBtn: "Descargar para Mac (Alpha)",
+      accountConfirmed: "¡Tu cuenta quedó confirmada! Ya puedes descargar Orchest.",
+      emailNotConfirmed: "Revisa tu correo y confirma tu cuenta primero.",
+      alreadyRegistered: "Ese correo ya tiene una cuenta creada.",
+      wrongCredentials: "Correo o contraseña incorrectos.",
+      invalidPassword: "La contraseña no es válida — prueba con al menos 6 caracteres.",
+      invalidEmail: "Ese correo no parece válido.",
+      noConnection: "No se pudo conectar. Revisa tu conexión e intenta de nuevo.",
+      loginFailedRetry: "No se pudo iniciar sesión. Intenta de nuevo en un momento.",
+      registerFailedRetry: "No se pudo crear la cuenta. Intenta de nuevo en un momento.",
+    },
+    en: {
+      needTerms: "You need to accept the Terms and Privacy Policy to continue.",
+      shortPassword: "Your password needs at least 6 characters.",
+      notConfigured: "Account system not configured yet — check back soon.",
+      creatingAccount: "Creating account…",
+      accountCreated: "Account created! Check your email to confirm it, then log in.",
+      createAccountBtn: "Create account",
+      loggingIn: "Logging in…",
+      loginBtn: "Log in",
+      needAccountToDownload: "Create your free account to download.",
+      notAvailableYet: "The download isn't available yet.",
+      downloading: "Downloading…",
+      downloadStarted: "Download started!",
+      sessionExpired: "Your session expired — log in again.",
+      downloadFailed: "Couldn't download. Try again in a moment.",
+      connectionFailed: "Couldn't connect. Check your connection.",
+      downloadBtn: "Download for Mac (Alpha)",
+      accountConfirmed: "Your account is confirmed! You can now download Orchest.",
+      emailNotConfirmed: "Check your email and confirm your account first.",
+      alreadyRegistered: "That email already has an account.",
+      wrongCredentials: "Wrong email or password.",
+      invalidPassword: "That password isn't valid — try at least 6 characters.",
+      invalidEmail: "That email doesn't look valid.",
+      noConnection: "Couldn't connect. Check your connection and try again.",
+      loginFailedRetry: "Couldn't log in. Try again in a moment.",
+      registerFailedRetry: "Couldn't create the account. Try again in a moment.",
+    },
+  };
+  function t(key) {
+    return MSG[window.ORCHEST_LANG === "en" ? "en" : "es"][key];
+  }
 
   // --- Sesión (localStorage) -------------------------------------------------
 
@@ -1314,26 +1572,24 @@
     var lower = raw.toLowerCase();
 
     if (lower.indexOf("email not confirmed") !== -1) {
-      return "Revisá tu correo y confirmá tu cuenta primero.";
+      return t("emailNotConfirmed");
     }
     if (lower.indexOf("already registered") !== -1 || lower.indexOf("already exists") !== -1) {
-      return "Ese correo ya tiene una cuenta creada.";
+      return t("alreadyRegistered");
     }
     if (context === "login" && (lower.indexOf("invalid") !== -1 || lower.indexOf("credentials") !== -1)) {
-      return "Correo o contraseña incorrectos.";
+      return t("wrongCredentials");
     }
     if (lower.indexOf("password") !== -1) {
-      return "La contraseña no es válida — probá con al menos 6 caracteres.";
+      return t("invalidPassword");
     }
     if (lower.indexOf("email") !== -1 && lower.indexOf("invalid") !== -1) {
-      return "Ese correo no parece válido.";
+      return t("invalidEmail");
     }
     if (status === 0) {
-      return "No se pudo conectar. Revisá tu conexión e intentá de nuevo.";
+      return t("noConnection");
     }
-    return context === "login"
-      ? "No se pudo iniciar sesión. Intentá de nuevo en un momento."
-      : "No se pudo crear la cuenta. Intentá de nuevo en un momento.";
+    return context === "login" ? t("loginFailedRetry") : t("registerFailedRetry");
   }
 
   // --- Registro -----------------------------------------------------------------
@@ -1348,20 +1604,20 @@
     var submitBtn = document.getElementById("authSubmit");
 
     if (!termsInput.checked) {
-      showAuthMessage("Tenés que aceptar los Términos y Condiciones para continuar.", "error");
+      showAuthMessage(t("needTerms"), "error");
       return;
     }
     if (passwordInput.value.length < 6) {
-      showAuthMessage("La contraseña necesita al menos 6 caracteres.", "error");
+      showAuthMessage(t("shortPassword"), "error");
       return;
     }
     if (!configured) {
-      showAuthMessage("Cuenta todavía no configurada — volvé pronto.", "error");
+      showAuthMessage(t("notConfigured"), "error");
       return;
     }
 
     submitBtn.disabled = true;
-    submitBtn.textContent = "Creando cuenta…";
+    submitBtn.textContent = t("creatingAccount");
 
     fetch(SUPABASE_URL + "/auth/v1/signup", {
       method: "POST",
@@ -1378,7 +1634,7 @@
           showAuthMessage(friendlyAuthError(result.body, result.status, "register"), "error");
           return;
         }
-        showAuthMessage("¡Cuenta creada! Revisá tu correo para confirmarla, y después iniciá sesión.", "success");
+        showAuthMessage(t("accountCreated"), "success");
         registerForm.reset();
       })
       .catch(function () {
@@ -1386,7 +1642,7 @@
       })
       .finally(function () {
         submitBtn.disabled = false;
-        submitBtn.textContent = "Crear cuenta";
+        submitBtn.textContent = t("createAccountBtn");
       });
   });
 
@@ -1401,12 +1657,12 @@
     var submitBtn = document.getElementById("loginSubmit");
 
     if (!configured) {
-      showAuthMessage("Cuenta todavía no configurada — volvé pronto.", "error");
+      showAuthMessage(t("notConfigured"), "error");
       return;
     }
 
     submitBtn.disabled = true;
-    submitBtn.textContent = "Iniciando sesión…";
+    submitBtn.textContent = t("loggingIn");
 
     fetch(SUPABASE_URL + "/auth/v1/token?grant_type=password", {
       method: "POST",
@@ -1436,7 +1692,7 @@
       })
       .finally(function () {
         submitBtn.disabled = false;
-        submitBtn.textContent = "Iniciar sesión";
+        submitBtn.textContent = t("loginBtn");
       });
   });
 
@@ -1480,18 +1736,18 @@
 
     if (!session) {
       activateAccountTab(document.getElementById("loginForm").hidden ? "register" : "login");
-      showAuthMessage("Creá tu cuenta gratis para descargar.", "error");
+      showAuthMessage(t("needAccountToDownload"), "error");
       return;
     }
 
     if (!configured) {
-      showDownloadMessage("La descarga no está disponible todavía.", "error");
+      showDownloadMessage(t("notAvailableYet"), "error");
       return;
     }
 
     downloadMessage.hidden = true;
     postDownloadLink.classList.remove("is-visible");
-    setDownloadButtonsState("Descargando…", true);
+    setDownloadButtonsState(t("downloading"), true);
 
     fetch(SUPABASE_URL + RELEASE_PATH, {
       cache: "no-store",
@@ -1520,7 +1776,7 @@
       .then(function (result) {
         if (result.ok) {
           triggerBlobDownload(result.blob);
-          showDownloadMessage("¡Descarga iniciada!", "success");
+          showDownloadMessage(t("downloadStarted"), "success");
           postDownloadLink.classList.add("is-visible");
           return;
         }
@@ -1544,20 +1800,20 @@
         if (isAuthError) {
           clearSession();
           renderAuthState();
-          showAuthMessage("Tu sesión expiró — iniciá sesión de nuevo.", "error");
+          showAuthMessage(t("sessionExpired"), "error");
           return;
         }
         if (isMissing) {
-          showDownloadMessage("La descarga no está disponible todavía.", "error");
+          showDownloadMessage(t("notAvailableYet"), "error");
           return;
         }
-        showDownloadMessage("No se pudo descargar. Intentá de nuevo en un momento.", "error");
+        showDownloadMessage(t("downloadFailed"), "error");
       })
       .catch(function () {
-        showDownloadMessage("No se pudo conectar. Revisá tu conexión.", "error");
+        showDownloadMessage(t("connectionFailed"), "error");
       })
       .finally(function () {
-        setDownloadButtonsState("Descargar para Mac (Alpha)", false);
+        setDownloadButtonsState(t("downloadBtn"), false);
       });
   }
 
@@ -1603,7 +1859,7 @@
         });
         renderAuthState();
         if (type === "signup") {
-          showAuthMessage("¡Tu cuenta quedó confirmada! Ya podés descargar Orchest.", "success");
+          showAuthMessage(t("accountConfirmed"), "success");
         }
         // Limpia el token de la URL/historial una vez guardada la sesión.
         history.replaceState(null, "", window.location.pathname + window.location.search + "#cuenta");
