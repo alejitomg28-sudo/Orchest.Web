@@ -227,8 +227,8 @@
   } catch (e) {
     /* private mode */
   }
-  var nav = (navigator.language || "es").toLowerCase();
-  var initial = saved === "en" || saved === "es" ? saved : nav.indexOf("en") === 0 ? "en" : "es";
+  var nav = (navigator.language || "en").toLowerCase();
+  var initial = saved === "en" || saved === "es" ? saved : nav.indexOf("es") === 0 ? "es" : "en";
   applyLang(initial);
 })();
 </script>
