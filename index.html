@@ -1124,8 +1124,8 @@
     } catch (e) {
       /* private mode — fall through to detection */
     }
-    var nav = (navigator.language || navigator.userLanguage || "en").toLowerCase();
-    return nav.indexOf("es") === 0 ? "es" : "en";
+    var nav = (navigator.language || navigator.userLanguage || "es").toLowerCase();
+    return nav.indexOf("en") === 0 ? "en" : "es";
   }
 
   function applyLang(lang) {
