@@ -45,10 +45,10 @@
 <div class="wrap">
   <a class="back" href="index.html#cuenta">← Volver a Orchest</a>
   <h1>Política de Privacidad</h1>
-  <p class="updated">Última actualización: <span class="fill">17 de julio de 2026</span> · Contacto: <span class="fill">alejitomg28@gmail.com</span></p>
+  <p class="updated">Última actualización: <span class="fill">30 de julio de 2026</span> · Contacto: <span class="fill">alejitomg28@gmail.com</span></p>
 
   <p>
-    Orchest es un agente local-first: la mayoría de lo que haces con él vive únicamente
+    Orchest es un agente local-first: la mayoría de lo que hacés con él vive únicamente
     en tu computadora. Esta página explica, sin vueltas, qué datos existen, dónde viven,
     y qué sale de tu máquina — y qué no.
   </p>
@@ -68,14 +68,25 @@
 
   <h2>Lo que sí puede salir — y bajo qué condición</h2>
   <div class="card cloud">
-    <p><strong>Razonamiento en la nube (opcional).</strong> Si eliges un proveedor de IA en la nube (OpenAI o Anthropic) en vez del modo local, Orchest redacta el texto antes de enviarlo: nombres, correos, teléfonos y ubicaciones se reemplazan por etiquetas anónimas (<code>&lt;PERSON_1&gt;</code>, <code>&lt;EMAIL_1&gt;</code>, etc.). El mapa que traduce esas etiquetas de vuelta a datos reales nunca sale de tu máquina.</p>
+    <p><strong>Razonamiento en la nube (opcional).</strong> Si elegís un proveedor de IA en la nube (OpenAI o Anthropic) en vez del modo local, Orchest redacta el texto antes de enviarlo: nombres, correos, teléfonos y ubicaciones se reemplazan por etiquetas anónimas (<code>&lt;PERSON_1&gt;</code>, <code>&lt;EMAIL_1&gt;</code>, etc.). El mapa que traduce esas etiquetas de vuelta a datos reales nunca sale de tu máquina.</p>
   </div>
   <div class="card cloud">
-    <p><strong>Google Calendar (opcional).</strong> Si conectas tu calendario, Orchest le pide a Google, con permiso de solo lectura, tus próximos eventos. El token de esa conexión se guarda cifrado en el llavero de tu sistema operativo, nunca en un servidor nuestro. Puedes desconectarlo cuando quieras.</p>
+    <p><strong>Google Calendar (opcional).</strong> Si conectás tu calendario, Orchest le pide permiso a Google para <strong>consultar, crear, modificar y borrar eventos</strong> — únicamente en tu calendario "principal" propio, nunca en calendarios que otras personas compartieron con vos. Lo usa para mostrarte tus próximos eventos y, cuando le pedís una tarea con fecha, para crear/actualizar/borrar el evento correspondiente en tu calendario real. El token de esa conexión se guarda cifrado en el llavero de tu sistema operativo, nunca en un servidor nuestro, y se borra de ahí en el momento en que desconectás el calendario desde Orchest.</p>
+    <p>Si además tenés activado el razonamiento en la nube (ver más abajo), los títulos y horarios de tus eventos pueden formar parte del contexto que se envía — redactados de la misma forma, con nombres/lugares reemplazados por etiquetas anónimas antes de salir de tu máquina.</p>
   </div>
   <div class="card cloud">
-    <p><strong>Tu cuenta en orchest.info (obligatorio para registrarte).</strong> Si creas una cuenta en la web pública, tu correo y contraseña se guardan en Supabase (nuestro proveedor de autenticación), de forma independiente y sin conexión a lo que haces con tu Orchest local. Esa cuenta sirve para identificarte y, más adelante, para gestionar tu plan — nunca para ver tus tareas, tu voz o tus conversaciones, que Orchest ni siquiera nos transmite.</p>
+    <p><strong>Tu cuenta en orchest.info (obligatorio para registrarte).</strong> Si creás una cuenta en la web pública, tu correo y contraseña se guardan en Supabase (nuestro proveedor de autenticación), de forma independiente y sin conexión a lo que hacés con tu Orchest local. Esa cuenta sirve para identificarte y, más adelante, para gestionar tu plan — nunca para ver tus tareas, tu voz o tus conversaciones, que Orchest ni siquiera nos transmite.</p>
   </div>
+
+  <h2>Cumplimiento de Uso Limitado (Google)</h2>
+  <p>El uso de datos recibidos de las APIs de Google cumple con la
+  <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Política de Datos de Usuario de los Servicios de API de Google</a>,
+  incluyendo los requisitos de Uso Limitado. En concreto: los datos de tu
+  Google Calendar nunca se usan para entrenar ni mejorar modelos de
+  inteligencia artificial (ni los nuestros ni los de terceros como OpenAI o
+  Anthropic), nunca se transfieren a anunciantes ni a corredores de datos, y
+  solo se usan para las funciones que ya te mostramos arriba: mostrarte y
+  gestionar tus propios eventos.</p>
 
   <h2>Lo que jamás recolectamos</h2>
   <ul>
@@ -86,9 +97,9 @@
 
   <h2>Tus derechos</h2>
   <p>
-    Puedes borrar tus datos locales en cualquier momento (son un archivo en tu disco).
-    Puedes pedirnos eliminar tu cuenta de orchest.info escribiendo a
-    <span class="fill">alejitomg28@gmail.com</span>. Si eres residente de la Unión Europea
+    Podés borrar tus datos locales en cualquier momento (son un archivo en tu disco).
+    Podés pedirnos eliminar tu cuenta de orchest.info escribiendo a
+    <span class="fill">alejitomg28@gmail.com</span>. Si sos residente de la Unión Europea
     u otra jurisdicción con derechos de protección de datos reconocidos, esos derechos
     (acceso, rectificación, portabilidad, olvido) aplican sobre los datos que sí tenemos
     — es decir, los de tu cuenta, no los de tu uso local de Orchest, que no vemos.
