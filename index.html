@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,6 +28,30 @@
       --rule: rgba(33, 31, 26, 0.14);
       --cloud: #2f6fa8;
     }
+  }
+
+  /* Explicit choice from the sun/moon toggle below always wins over the
+     system's prefers-color-scheme, in both directions. */
+  :root[data-theme="light"] {
+    --bg: #f6f1e7;
+    --bg-card: #ffffff;
+    --text: #211f1a;
+    --text-secondary: #6b6558;
+    --accent: #a8672a;
+    --accent-text: #ffffff;
+    --rule: rgba(33, 31, 26, 0.14);
+    --cloud: #2f6fa8;
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0e0f13;
+    --bg-card: #1c1e26;
+    --text: #ece7da;
+    --text-secondary: #9b9686;
+    --accent: #d99a4e;
+    --accent-text: #0e0f13;
+    --rule: rgba(236, 231, 218, 0.14);
+    --cloud: #4aa8d9;
   }
 
   * { box-sizing: border-box; }
@@ -63,12 +87,24 @@
 
   header.top nav a:hover { color: var(--text); }
 
+  .controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-left: 24px;
+  }
+
+  /* Plain text toggle on purpose — an earlier version filled the active
+     side with a solid warm-amber block inside a rounded pill, which read
+     to more than one person as a mature-content site badge rather than a
+     language switch. Underline-on-active reads unambiguously as "EN | ES"
+     site-language links, the same pattern most multilingual sites use. */
   .lang-switch {
     display: inline-flex;
-    margin-left: 24px;
-    border: 1px solid var(--rule);
-    border-radius: 999px;
-    overflow: hidden;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
   }
 
   .lang-btn {
@@ -77,11 +113,34 @@
     color: var(--text-secondary);
     font-size: 0.78rem;
     font-weight: 600;
-    padding: 5px 10px;
+    padding: 2px 1px;
     cursor: pointer;
   }
 
-  .lang-btn.active { background: var(--accent); color: var(--accent-text, #14151b); }
+  .lang-btn.active { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  .lang-divider { color: var(--rule); font-size: 0.75rem; }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    color: var(--text-secondary);
+    cursor: pointer;
+  }
+
+  .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+  .theme-toggle svg { width: 15px; height: 15px; display: block; }
+  .theme-toggle .theme-icon-moon { display: none; }
+  .theme-toggle[data-current="dark"] .theme-icon-sun { display: none; }
+  .theme-toggle[data-current="dark"] .theme-icon-moon { display: block; }
 
   /* --- Hero ------------------------------------------------------------ */
 
@@ -699,9 +758,21 @@
       <a href="#seccion-privacidad" data-i18n="nav.privacy">Privacidad</a>
       <a href="#planes" data-i18n="nav.plans">Planes</a>
       <a href="#cuenta" data-i18n="nav.account">Cuenta</a>
-      <span class="lang-switch">
-        <button type="button" class="lang-btn" data-lang="es">ES</button>
-        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      <span class="controls">
+        <span class="lang-switch">
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+          <span class="lang-divider" aria-hidden="true">/</span>
+          <button type="button" class="lang-btn" data-lang="es">ES</button>
+        </span>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch between light and dark theme">
+          <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
       </span>
     </nav>
   </header>
@@ -749,12 +820,12 @@
     <div class="demo-stage">
       <div class="demo-step-label" data-i18n="demo.step1">1. Elige una frase</div>
       <div class="demo-phrases">
-        <button class="demo-phrase-btn" type="button" data-phrase="Llamar a Roberto sobre la reunión en Central Park" data-phrase-en="Call Roberto about the meeting in Central Park" data-i18n="demo.btn1">"Llamar a Roberto sobre la reunión…"</button>
-        <button class="demo-phrase-btn" type="button" data-phrase="Recordarme enviar el informe a maria.gomez@empresa.com mañana" data-phrase-en="Remind me to send the report to maria.gomez@company.com tomorrow" data-i18n="demo.btn2">"Recordarme enviar el informe…"</button>
-        <button class="demo-phrase-btn" type="button" data-phrase="Agendar café con Valentina el viernes" data-phrase-en="Schedule coffee with Valentina on Friday" data-i18n="demo.btn3">"Agendar café con Valentina el viernes"</button>
-        <button class="demo-phrase-btn" type="button" data-phrase="Guardarle el teléfono a Fernanda: 55 1234 5678" data-phrase-en="Save Fernanda's phone number: 55 1234 5678" data-i18n="demo.btn4">"Guardarle el teléfono a Fernanda…"</button>
-        <button class="demo-phrase-btn" type="button" data-phrase="Reservar mesa para cenar con Diego y Camila en Polanco el sábado" data-phrase-en="Book a dinner table with Diego and Camila in Polanco on Saturday" data-i18n="demo.btn5">"Reservar mesa con Diego y Camila…"</button>
-        <button class="demo-phrase-btn" type="button" data-phrase="Enviar el contrato a diego.ramirez@constructora.mx antes del jueves" data-phrase-en="Send the contract to diego.ramirez@constructora.mx before Thursday" data-i18n="demo.btn6">"Enviar el contrato antes del jueves…"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Llamar a Liam sobre la reunión en Central Park" data-phrase-en="Call Liam about the meeting in Central Park" data-i18n="demo.btn1">"Llamar a Liam sobre la reunión…"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Recordarme enviar el informe a noah.becker@empresa.com mañana" data-phrase-en="Remind me to send the report to noah.becker@company.com tomorrow" data-i18n="demo.btn2">"Recordarme enviar el informe…"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Agendar café con Emma el viernes" data-phrase-en="Schedule coffee with Emma on Friday" data-i18n="demo.btn3">"Agendar café con Emma el viernes"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Guardarle el teléfono a Ava: 55 1234 5678" data-phrase-en="Save Ava's phone number: 55 1234 5678" data-i18n="demo.btn4">"Guardarle el teléfono a Ava…"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Reservar mesa para cenar con Luca y Mia en Polanco el sábado" data-phrase-en="Book a dinner table with Luca and Mia in Polanco on Saturday" data-i18n="demo.btn5">"Reservar mesa con Luca y Mia…"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Enviar el contrato a luca.silva@constructora.mx antes del jueves" data-phrase-en="Send the contract to luca.silva@constructora.mx before Thursday" data-i18n="demo.btn6">"Enviar el contrato antes del jueves…"</button>
       </div>
 
       <div class="demo-mic-row">
@@ -848,9 +919,9 @@
       <div class="priv-compare-col">
         <div class="priv-compare-label" data-i18n="priv.yousaid">Tú dijiste</div>
         <p data-i18n="priv.saidtext">
-          "llamar a <span class="priv-name">Roberto</span> sobre la reunión en
+          "llamar a <span class="priv-name">Liam</span> sobre la reunión en
           <span class="priv-name">Central Park</span>, enviar el reporte a
-          <span class="priv-name">maria.gomez@empresa.com</span>"
+          <span class="priv-name">noah.becker@empresa.com</span>"
         </p>
       </div>
       <div class="priv-compare-col priv-compare-cloud">
@@ -984,10 +1055,11 @@
 <script>
 "use strict";
 
-// --- Idioma (ES por defecto — detección por navigator.language, sin
-// servicios externos de geolocalización: la propia página de privacidad
-// promete "sin scripts de terceros", así que la detección tiene que ser
-// 100% local) ------------------------------------------------------------
+// --- Idioma (EN por defecto para cualquier visitante nuevo, sin importar
+// el idioma del navegador — antes se detectaba por navigator.language, lo
+// que mostraba español a cualquiera con el sistema en es-*. La elección
+// manual del visitante, una vez que la hace, se respeta siempre a través
+// de localStorage; nunca se vuelve a inferir del navegador.) --------------
 
 (function initI18n() {
   var EN = {
@@ -1010,11 +1082,11 @@
     "demo.title": "Try it, no install required",
     "demo.subtitle": "A faithful simulation of what happens on your Mac when you talk to Orchest.",
     "demo.step1": "1. Choose a phrase",
-    "demo.btn1": '"Call Roberto about the meeting…"',
+    "demo.btn1": '"Call Liam about the meeting…"',
     "demo.btn2": '"Remind me to send the report…"',
-    "demo.btn3": '"Schedule coffee with Valentina on Friday"',
-    "demo.btn4": '"Save Fernanda\'s phone number…"',
-    "demo.btn5": '"Book a table with Diego and Camila…"',
+    "demo.btn3": '"Schedule coffee with Emma on Friday"',
+    "demo.btn4": '"Save Ava\'s phone number…"',
+    "demo.btn5": '"Book a table with Luca and Mia…"',
     "demo.btn6": '"Send the contract before Thursday…"',
     "demo.transcriptPlaceholder": "Choose a phrase above to start…",
     "demo.step2": "2. This is the only thing that would leave your machine",
@@ -1048,9 +1120,9 @@
       '<span class="priv-lock">🔒 your calendar</span>',
     "priv.yousaid": "You said",
     "priv.saidtext":
-      '"call <span class="priv-name">Roberto</span> about the meeting in ' +
+      '"call <span class="priv-name">Liam</span> about the meeting in ' +
       '<span class="priv-name">Central Park</span>, send the report to ' +
-      '<span class="priv-name">maria.gomez@empresa.com</span>"',
+      '<span class="priv-name">noah.becker@empresa.com</span>"',
     "priv.cloudsaw": "The cloud saw",
     "priv.cloudsawtext":
       '"call <span class="priv-token">&lt;PERSON_1&gt;</span> about the meeting in ' +
@@ -1122,10 +1194,9 @@
       var saved = localStorage.getItem("orchestLang");
       if (saved === "en" || saved === "es") return saved;
     } catch (e) {
-      /* private mode — fall through to detection */
+      /* private mode — no saved choice possible, just use the default */
     }
-    var nav = (navigator.language || navigator.userLanguage || "es").toLowerCase();
-    return nav.indexOf("en") === 0 ? "en" : "es";
+    return "en";
   }
 
   function applyLang(lang) {
@@ -1159,6 +1230,57 @@
   });
 
   applyLang(detectLang());
+})();
+
+// --- Tema (claro/oscuro) — sigue el sistema por defecto (prefers-color-
+// scheme, ya declarado arriba en el CSS); el botón de sol/luna permite
+// forzar una elección manual, guardada en localStorage y con prioridad
+// sobre el sistema en cualquier dirección. --------------------------------
+
+(function initTheme() {
+  var toggle = document.getElementById("themeToggle");
+  var media = window.matchMedia("(prefers-color-scheme: light)");
+
+  function systemTheme() {
+    return media.matches ? "light" : "dark";
+  }
+
+  function currentTheme() {
+    try {
+      var saved = localStorage.getItem("orchestTheme");
+      if (saved === "light" || saved === "dark") return saved;
+    } catch (e) {
+      /* private mode — fall through to the system preference */
+    }
+    return systemTheme();
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    if (toggle) toggle.setAttribute("data-current", theme);
+  }
+
+  toggle.addEventListener("click", function () {
+    var next = currentTheme() === "light" ? "dark" : "light";
+    try {
+      localStorage.setItem("orchestTheme", next);
+    } catch (e) {
+      /* private mode — the choice just won't persist across reloads */
+    }
+    applyTheme(next);
+  });
+
+  // No manual choice saved yet: keep following the system live.
+  media.addEventListener("change", function () {
+    try {
+      if (localStorage.getItem("orchestTheme")) return;
+    } catch (e) {
+      /* private mode — nothing was ever saved, always follow the system */
+    }
+    applyTheme(systemTheme());
+  });
+
+  applyTheme(currentTheme());
 })();
 
 // --- Scroll reveal ---------------------------------------------------------
@@ -1235,21 +1357,21 @@
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var PRESETS = {
-    "Llamar a Roberto sobre la reunión en Central Park": {
+    "Llamar a Liam sobre la reunión en Central Park": {
       es: {
         redacted:
           'Llamar a <span class="demo-token">&lt;PERSON_1&gt;</span> sobre la reunión en ' +
           '<span class="demo-token">&lt;LOCATION_1&gt;</span>',
-        task: { title: "Llamar a Roberto", meta: "Sobre la reunión en Central Park", priority: "high" },
+        task: { title: "Llamar a Liam", meta: "Sobre la reunión en Central Park", priority: "high" },
       },
       en: {
         redacted:
           'Call <span class="demo-token">&lt;PERSON_1&gt;</span> about the meeting in ' +
           '<span class="demo-token">&lt;LOCATION_1&gt;</span>',
-        task: { title: "Call Roberto", meta: "About the meeting in Central Park", priority: "high" },
+        task: { title: "Call Liam", meta: "About the meeting in Central Park", priority: "high" },
       },
     },
-    "Recordarme enviar el informe a maria.gomez@empresa.com mañana": {
+    "Recordarme enviar el informe a noah.becker@empresa.com mañana": {
       es: {
         redacted:
           'Recordarme enviar el informe a <span class="demo-token">&lt;EMAIL_1&gt;</span> mañana',
@@ -1261,47 +1383,47 @@
         task: { title: "Send the report", meta: "Due: tomorrow", priority: "urgent" },
       },
     },
-    "Agendar café con Valentina el viernes": {
+    "Agendar café con Emma el viernes": {
       es: {
         redacted: 'Agendar café con <span class="demo-token">&lt;PERSON_1&gt;</span> el viernes',
-        task: { title: "Café con Valentina", meta: "El viernes", priority: "medium" },
+        task: { title: "Café con Emma", meta: "El viernes", priority: "medium" },
       },
       en: {
         redacted: 'Schedule coffee with <span class="demo-token">&lt;PERSON_1&gt;</span> on Friday',
-        task: { title: "Coffee with Valentina", meta: "On Friday", priority: "medium" },
+        task: { title: "Coffee with Emma", meta: "On Friday", priority: "medium" },
       },
     },
-    "Guardarle el teléfono a Fernanda: 55 1234 5678": {
+    "Guardarle el teléfono a Ava: 55 1234 5678": {
       es: {
         redacted:
           'Guardarle el teléfono a <span class="demo-token">&lt;PERSON_1&gt;</span>: ' +
           '<span class="demo-token">&lt;PHONE_1&gt;</span>',
-        task: { title: "Guardar teléfono de Fernanda", meta: "Nuevo contacto", priority: "low" },
+        task: { title: "Guardar teléfono de Ava", meta: "Nuevo contacto", priority: "low" },
       },
       en: {
         redacted:
           'Save <span class="demo-token">&lt;PERSON_1&gt;</span>\'s phone number: ' +
           '<span class="demo-token">&lt;PHONE_1&gt;</span>',
-        task: { title: "Save Fernanda's number", meta: "New contact", priority: "low" },
+        task: { title: "Save Ava's number", meta: "New contact", priority: "low" },
       },
     },
-    "Reservar mesa para cenar con Diego y Camila en Polanco el sábado": {
+    "Reservar mesa para cenar con Luca y Mia en Polanco el sábado": {
       es: {
         redacted:
           'Reservar mesa para cenar con <span class="demo-token">&lt;PERSON_1&gt;</span> y ' +
           '<span class="demo-token">&lt;PERSON_2&gt;</span> en ' +
           '<span class="demo-token">&lt;LOCATION_1&gt;</span> el sábado',
-        task: { title: "Cena con Diego y Camila", meta: "Sábado en Polanco", priority: "medium" },
+        task: { title: "Cena con Luca y Mia", meta: "Sábado en Polanco", priority: "medium" },
       },
       en: {
         redacted:
           'Book a dinner table with <span class="demo-token">&lt;PERSON_1&gt;</span> and ' +
           '<span class="demo-token">&lt;PERSON_2&gt;</span> in ' +
           '<span class="demo-token">&lt;LOCATION_1&gt;</span> on Saturday',
-        task: { title: "Dinner with Diego and Camila", meta: "Saturday in Polanco", priority: "medium" },
+        task: { title: "Dinner with Luca and Mia", meta: "Saturday in Polanco", priority: "medium" },
       },
     },
-    "Enviar el contrato a diego.ramirez@constructora.mx antes del jueves": {
+    "Enviar el contrato a luca.silva@constructora.mx antes del jueves": {
       es: {
         redacted:
           'Enviar el contrato a <span class="demo-token">&lt;EMAIL_1&gt;</span> antes del jueves',
