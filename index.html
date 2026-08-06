@@ -277,6 +277,114 @@
     .reveal { opacity: 1; transform: none; transition: none; }
   }
 
+  /* --- Qué hace hoy ------------------------------------------------------- */
+
+  .cap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  /* Capital ocupa el doble: es la razón por la que alguien vuelve, no una
+     función más de la lista. */
+  .cap-card-wide { grid-column: span 2; }
+
+  .cap-card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 22px;
+    transition: border-color 200ms ease-out, transform 200ms ease-out;
+  }
+  .cap-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .cap-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .cap-card h3 {
+    font-size: 1.18rem;
+    margin: 0 0 10px;
+    line-height: 1.25;
+  }
+  .cap-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .cap-card strong { color: var(--text); }
+  /* La frase dicha, en el tipo de letra del sistema y entre comillas: es lo
+     que alguien diría en voz alta, no un texto de folleto. */
+  .cap-quote {
+    font-size: 1.02rem;
+    color: var(--text) !important;
+    border-left: 2px solid var(--accent);
+    padding-left: 12px;
+    margin: 0 0 12px !important;
+    font-style: italic;
+  }
+  /* De ancho completo y al final: es la afirmación que ningún competidor
+     puede copiar, así que cierra la sección en vez de quedar suelta en una
+     última fila a medias. */
+  .cap-card-proof {
+    grid-column: 1 / -1;
+    background: linear-gradient(160deg,
+      color-mix(in srgb, var(--accent) 10%, var(--bg-card)),
+      var(--bg-card));
+    border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  .cap-card-proof p { max-width: 62ch; }
+
+  /* --- Lo que viene ------------------------------------------------------- */
+
+  .soon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  /* Deliberadamente más apagadas que las de arriba, y sin hover: nada de esto
+     se puede usar todavía, y que se vea "clickeable" sería prometer de más. */
+  .soon-card {
+    background: transparent;
+    border: 1px dashed var(--rule);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .soon-badge {
+    display: inline-block;
+    font-size: 0.66rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--text-secondary);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 3px 10px;
+    margin-bottom: 12px;
+  }
+  .soon-card h3 {
+    font-size: 1.05rem;
+    margin: 0 0 8px;
+    color: var(--text-secondary);
+  }
+  .soon-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  @media (max-width: 720px) {
+    .cap-card-wide { grid-column: span 1; }
+  }
+
   /* --- Pilares (bento) ---------------------------------------------------- */
 
   .moat-grid {
@@ -716,12 +824,40 @@
     max-width: 320px;
   }
 
-  .demo-task-card.priority-urgent { border-left-color: #d1614f; }
-  .demo-task-card.priority-high { border-left-color: var(--accent); }
-  .demo-task-card.priority-medium { border-left-color: #4a90d9; }
+  /* El color del borde dice de qué tipo fue la respuesta, sin necesidad de
+     ponerle una etiqueta encima. */
+  .demo-task-card.demo-card-money { border-left-color: var(--accent); }
+  .demo-task-card.demo-card-answer { border-left-color: #4aa87d; }
+  .demo-task-card.demo-card-watch { border-left-color: #4a90d9; }
+  .demo-task-card.demo-card-sobre { border-left-color: #a97bd9; }
 
-  .demo-task-title { font-weight: 600; font-size: 0.94rem; }
+  /* Más ancha que antes: ahora lleva la cuenta hecha debajo, no solo un
+     título y una fecha. */
+  .demo-task-card { max-width: 420px; }
+
+  .demo-task-title { font-weight: 600; font-size: 1.02rem; }
   .demo-task-meta { color: var(--text-secondary); font-size: 0.82rem; margin-top: 4px; }
+
+  .demo-task-lines {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .demo-task-line {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+  }
+  .demo-task-lines:empty { display: none; }
+
+  /* "Nada" tiene que verse como una afirmación, no como un campo vacío. */
+  .demo-nothing {
+    color: var(--accent);
+    font-weight: 600;
+  }
 
   .demo-closing {
     text-align: center;
@@ -753,9 +889,10 @@
   <header class="top">
     <div class="logo">Orchest</div>
     <nav>
-      <a href="#producto" data-i18n="nav.product">Producto</a>
+      <a href="#capacidades" data-i18n="nav.features">Qué hace</a>
       <a href="#seccion-demo" data-i18n="nav.howitworks">Cómo funciona</a>
       <a href="#seccion-privacidad" data-i18n="nav.privacy">Privacidad</a>
+      <a href="#proximamente" data-i18n="nav.soon">Lo que viene</a>
       <a href="#planes" data-i18n="nav.plans">Planes</a>
       <a href="#cuenta" data-i18n="nav.account">Cuenta</a>
       <span class="controls">
@@ -812,6 +949,77 @@
     </p>
   </section>
 
+  <!-- Lo que Orchest ya hace. Va ANTES de la demo a propósito: la demo
+       demuestra bien la privacidad, pero lo primero que alguien necesita
+       saber es para qué le sirve. -->
+  <section id="capacidades" class="reveal">
+    <h2 data-i18n="cap.title">Qué hace hoy</h2>
+    <p class="section-sub" data-i18n="cap.subtitle">Todo esto ya funciona, hablando. Sin abrir nada, sin escribir.</p>
+
+    <div class="cap-grid">
+      <article class="cap-card cap-card-wide">
+        <span class="cap-tag" data-i18n="cap.tagMoney">Dinero</span>
+        <h3 data-i18n="cap.moneyTitle">Capital</h3>
+        <p class="cap-quote">“<span data-i18n="cap.moneyQuote">Gasté veinte mil en el almuerzo</span>”</p>
+        <p data-i18n="cap.moneyText">
+          Anotás gastos hablando, incluido el <strong>efectivo</strong> — el que
+          ninguna app conectada al banco puede ver. Preguntás
+          <em>“¿me alcanza para esto?”</em> antes de comprar, no después.
+          Sobres para separar la plata, reparto de gastos grandes en cuotas, y
+          un cierre semanal que te dice en qué se fue.
+        </p>
+      </article>
+
+      <article class="cap-card">
+        <span class="cap-tag" data-i18n="cap.tagDay">Tu día</span>
+        <h3 data-i18n="cap.tasksTitle">Pendientes y calendario</h3>
+        <p class="cap-quote">“<span data-i18n="cap.tasksQuote">Pasá lo del dentista para el viernes</span>”</p>
+        <p data-i18n="cap.tasksText">
+          Le hablás como a una persona: “lo del pasaporte”, “el informe”. No
+          hace falta saber nombres exactos ni tocar una lista.
+        </p>
+      </article>
+
+      <article class="cap-card">
+        <span class="cap-tag" data-i18n="cap.tagWatch">Vigías</span>
+        <h3 data-i18n="cap.watchTitle">Te avisa cuando pasa</h3>
+        <p class="cap-quote">“<span data-i18n="cap.watchQuote">Avisame si baja de 200 mil</span>”</p>
+        <p data-i18n="cap.watchText">
+          Revisa en segundo plano y te avisa una sola vez, cuando ocurre — no
+          cada vez que sigue ocurriendo.
+        </p>
+      </article>
+
+      <article class="cap-card">
+        <span class="cap-tag" data-i18n="cap.tagUndo">Volver atrás</span>
+        <h3 data-i18n="cap.undoTitle">“No, eso no”</h3>
+        <p data-i18n="cap.undoText">
+          Entendió mal y cerró algo que no era. Lo decís y vuelve. Un asistente
+          que actúa rápido necesita marcha atrás.
+        </p>
+      </article>
+
+      <article class="cap-card">
+        <span class="cap-tag" data-i18n="cap.tagMesh">Equipo</span>
+        <h3 data-i18n="cap.meshTitle">Entre tus dispositivos y tu gente</h3>
+        <p data-i18n="cap.meshText">
+          Repartir un gasto o delegar algo va de una máquina a otra,
+          directo. Sin servidor en el medio guardando quién le debe a quién.
+        </p>
+      </article>
+
+      <article class="cap-card cap-card-proof">
+        <span class="cap-tag" data-i18n="cap.tagOffline">Sin internet</span>
+        <h3 data-i18n="cap.offlineTitle">Apagá el wifi y seguí hablando</h3>
+        <p data-i18n="cap.offlineText">
+          Entiende tu voz y razona en tu Mac. En un avión, en un salón con mala
+          señal o con el router caído, funciona igual — está medido, no
+          prometido.
+        </p>
+      </article>
+    </div>
+  </section>
+
   <!-- SLOT: demo interactiva -->
   <section id="seccion-demo" class="reveal">
     <h2 data-i18n="demo.title">Probalo, sin instalar nada</h2>
@@ -820,12 +1028,12 @@
     <div class="demo-stage">
       <div class="demo-step-label" data-i18n="demo.step1">1. Elige una frase</div>
       <div class="demo-phrases">
-        <button class="demo-phrase-btn" type="button" data-phrase="Llamar a Liam sobre la reunión en Central Park" data-phrase-en="Call Liam about the meeting in Central Park" data-i18n="demo.btn1">"Llamar a Liam sobre la reunión…"</button>
-        <button class="demo-phrase-btn" type="button" data-phrase="Recordarme enviar el informe a noah.becker@empresa.com mañana" data-phrase-en="Remind me to send the report to noah.becker@company.com tomorrow" data-i18n="demo.btn2">"Recordarme enviar el informe…"</button>
-        <button class="demo-phrase-btn" type="button" data-phrase="Agendar café con Emma el viernes" data-phrase-en="Schedule coffee with Emma on Friday" data-i18n="demo.btn3">"Agendar café con Emma el viernes"</button>
-        <button class="demo-phrase-btn" type="button" data-phrase="Guardarle el teléfono a Ava: 55 1234 5678" data-phrase-en="Save Ava's phone number: 55 1234 5678" data-i18n="demo.btn4">"Guardarle el teléfono a Ava…"</button>
-        <button class="demo-phrase-btn" type="button" data-phrase="Reservar mesa para cenar con Luca y Mia en Polanco el sábado" data-phrase-en="Book a dinner table with Luca and Mia in Polanco on Saturday" data-i18n="demo.btn5">"Reservar mesa con Luca y Mia…"</button>
-        <button class="demo-phrase-btn" type="button" data-phrase="Enviar el contrato a luca.silva@constructora.mx antes del jueves" data-phrase-en="Send the contract to luca.silva@constructora.mx before Thursday" data-i18n="demo.btn6">"Enviar el contrato antes del jueves…"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Gasté 45 mil en el mercado" data-phrase-en="I spent 45 on groceries" data-i18n="demo.btn1">"Gasté 45 mil en el mercado"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="¿Me alcanza para unos audífonos de 300 mil?" data-phrase-en="Can I afford 300 headphones?" data-i18n="demo.btn2">"¿Me alcanza para unos audífonos…?"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="¿En qué se me fue la plata esta semana?" data-phrase-en="Where did my money go this week?" data-i18n="demo.btn3">"¿En qué se me fue la plata…?"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Guardá 200 mil para el viaje" data-phrase-en="Set aside 200 for the trip" data-i18n="demo.btn4">"Guardá 200 mil para el viaje"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Avisame si el dólar baja de 3.900" data-phrase-en="Tell me if the dollar drops below 3,900" data-i18n="demo.btn5">"Avisame si el dólar baja de 3.900"</button>
+        <button class="demo-phrase-btn" type="button" data-phrase="Le presté 80 mil a Emma el martes" data-phrase-en="I lent 80 to Emma on Tuesday" data-i18n="demo.btn6">"Le presté 80 mil a Emma el martes"</button>
       </div>
 
       <div class="demo-mic-row">
@@ -856,8 +1064,10 @@
 
       <div class="demo-closing" id="demoClosing" hidden>
         <p data-i18n="demo.closing">
-          Esto que acabas de ver es una simulación fiel del flujo real — no está conectado
-          a tu voz ni a ningún servidor. En tu Mac, pasa así, con tu voz de verdad.
+          Sí, esto fue una simulación — acá no hay micrófono ni servidor. Lo que no es
+          simulado es que Orchest hace exactamente esto en tu Mac, <strong>diciéndoselo en voz
+          alta</strong> y respondiendo en unos tres segundos. Sin abrir nada, sin escribir,
+          sin internet.
         </p>
         <a class="btn btn-primary" href="#cuenta" data-i18n="demo.closingBtn">Descargar Orchest</a>
       </div>
@@ -956,6 +1166,74 @@
         <div class="shot" data-i18n="tour.shot3"><!-- TODO: captura real del menubar --> ⌘ Menubar</div>
         <div class="label" data-i18n="tour.label3">Siempre a un clic, sin abrir nada de más</div>
       </div>
+    </div>
+  </section>
+
+  <!-- Lo que viene. Cada tarjeta lleva su etiqueta de "en construcción"
+       encima del título, no escondida al final: nadie debería creer que ya
+       puede usar algo de acá. -->
+  <section id="proximamente" class="reveal">
+    <h2 data-i18n="soon.title">Lo que viene</h2>
+    <p class="section-sub" data-i18n="soon.subtitle">
+      Todavía no está listo — esto es hacia dónde va Orchest, no lo que
+      descargás hoy.
+    </p>
+
+    <div class="soon-grid">
+      <article class="soon-card">
+        <span class="soon-badge" data-i18n="soon.badge">En construcción</span>
+        <h3 data-i18n="soon.studyTitle">Orchest para estudiar</h3>
+        <p data-i18n="soon.studyText">
+          Le das el horario y el programa de una materia, y las fechas entran
+          solas. Sesiones de estudio, repaso antes del examen, y avisos de la
+          página de la universidad.
+        </p>
+      </article>
+
+      <article class="soon-card">
+        <span class="soon-badge" data-i18n="soon.badge">En construcción</span>
+        <h3 data-i18n="soon.phoneTitle">Orchest en tu celular</h3>
+        <p data-i18n="soon.phoneText">
+          Capturás por voz en la calle y aparece en el Mac cuando llegás. El
+          celular como compañero, no como copia.
+        </p>
+      </article>
+
+      <article class="soon-card">
+        <span class="soon-badge" data-i18n="soon.badge">En construcción</span>
+        <h3 data-i18n="soon.mailTitle">Tu correo como fuente</h3>
+        <p data-i18n="soon.mailText">
+          “Avisame cuando llegue el correo del banco.” Lo mismo que ya hacen
+          los vigías con páginas y precios, pero con tu bandeja.
+        </p>
+      </article>
+
+      <article class="soon-card">
+        <span class="soon-badge" data-i18n="soon.badge">En construcción</span>
+        <h3 data-i18n="soon.docsTitle">Documentos que no salen de tu Mac</h3>
+        <p data-i18n="soon.docsText">
+          Soltás un PDF —un contrato, una guía, un recibo— y le preguntás, sin
+          subirlo a ningún servidor.
+        </p>
+      </article>
+
+      <article class="soon-card">
+        <span class="soon-badge" data-i18n="soon.badge">En construcción</span>
+        <h3 data-i18n="soon.routinesTitle">Rutinas</h3>
+        <p data-i18n="soon.routinesText">
+          “Todos los lunes preguntame por el presupuesto.” Vos ponés el ritmo;
+          él se acuerda.
+        </p>
+      </article>
+
+      <article class="soon-card">
+        <span class="soon-badge" data-i18n="soon.badge">En construcción</span>
+        <h3 data-i18n="soon.timeTitle">El cierre semanal de tu tiempo</h3>
+        <p data-i18n="soon.timeText">
+          Ya sabés en qué se te fue la plata. Falta el mismo informe para en
+          qué se te fue la semana.
+        </p>
+      </article>
     </div>
   </section>
 
@@ -1064,6 +1342,8 @@
 (function initI18n() {
   var EN = {
     "nav.product": "Product",
+    "nav.features": "What it does",
+    "nav.soon": "What's coming",
     "nav.howitworks": "How it works",
     "nav.privacy": "Privacy",
     "nav.plans": "Plans",
@@ -1082,20 +1362,89 @@
     "demo.title": "Try it, no install required",
     "demo.subtitle": "A faithful simulation of what happens on your Mac when you talk to Orchest.",
     "demo.step1": "1. Choose a phrase",
-    "demo.btn1": '"Call Liam about the meeting…"',
-    "demo.btn2": '"Remind me to send the report…"',
-    "demo.btn3": '"Schedule coffee with Emma on Friday"',
-    "demo.btn4": '"Save Ava\'s phone number…"',
-    "demo.btn5": '"Book a table with Luca and Mia…"',
-    "demo.btn6": '"Send the contract before Thursday…"',
+    "demo.btn1": '"I spent 45 on groceries"',
+    "demo.btn2": '"Can I afford 300 headphones?"',
+    "demo.btn3": '"Where did my money go this week?"',
+    "demo.btn4": '"Set aside 200 for the trip"',
+    "demo.btn5": '"Tell me if the dollar drops below 3,900"',
+    "demo.btn6": '"I lent 80 to Emma on Tuesday"',
     "demo.transcriptPlaceholder": "Choose a phrase above to start…",
     "demo.step2": "2. This is the only thing that would leave your machine",
     "demo.step3": "3. Orchest acts",
     "demo.closing":
-      "What you just saw is a faithful simulation of the real flow — it's not " +
-      "connected to your voice or to any server. On your Mac, it happens just " +
-      "like this, with your real voice.",
+      "Yes, that was a simulation — no microphone here, no server. What isn't " +
+      "simulated is that Orchest does exactly this on your Mac, <strong>by " +
+      "saying it out loud</strong>, answering in about three seconds. Nothing " +
+      "to open, nothing to type, no internet.",
     "demo.closingBtn": "Download Orchest",
+    "cap.title": "What it does today",
+    "cap.subtitle": "All of this already works, by voice. Nothing to open, nothing to type.",
+    "cap.tagMoney": "Money",
+    "cap.moneyTitle": "Capital",
+    "cap.moneyQuote": "I spent twenty on lunch",
+    "cap.moneyText":
+      "Log expenses out loud, <strong>cash included</strong> — the money no " +
+      "bank-linked app can see. Ask <em>“can I afford this?”</em> before you " +
+      "buy, not after. Envelopes to keep money apart, big expenses split into " +
+      "instalments, and a weekly close that tells you where it went.",
+    "cap.tagDay": "Your day",
+    "cap.tasksTitle": "Tasks and calendar",
+    "cap.tasksQuote": "Move the dentist thing to Friday",
+    "cap.tasksText":
+      "Talk to it like you'd talk to a person: “the passport thing”, “the " +
+      "report”. No exact names, no list to touch.",
+    "cap.tagWatch": "Watchers",
+    "cap.watchTitle": "It tells you when it happens",
+    "cap.watchQuote": "Tell me if it drops below 200",
+    "cap.watchText":
+      "Checks in the background and tells you once, when it happens — not " +
+      "every time it keeps happening.",
+    "cap.tagUndo": "Undo",
+    "cap.undoTitle": "“No, not that”",
+    "cap.undoText":
+      "It misheard and closed the wrong thing. Say so and it comes back. An " +
+      "assistant that acts fast needs a way back.",
+    "cap.tagMesh": "Team",
+    "cap.meshTitle": "Across your devices and your people",
+    "cap.meshText":
+      "Splitting an expense or handing off a task goes straight from one " +
+      "machine to another. No server in between keeping track of who owes whom.",
+    "cap.tagOffline": "No internet",
+    "cap.offlineTitle": "Turn off the wifi and keep talking",
+    "cap.offlineText":
+      "It hears you and reasons on your Mac. On a plane, in a room with bad " +
+      "signal, or with the router down, it works the same — measured, not " +
+      "promised.",
+    "soon.title": "What's coming",
+    "soon.subtitle":
+      "Not ready yet — this is where Orchest is going, not what you download " +
+      "today.",
+    "soon.badge": "In progress",
+    "soon.studyTitle": "Orchest for studying",
+    "soon.studyText":
+      "Give it your class schedule and a syllabus, and the dates land on " +
+      "their own. Study sessions, review before the exam, and alerts from " +
+      "your university's site.",
+    "soon.phoneTitle": "Orchest on your phone",
+    "soon.phoneText":
+      "Capture by voice on the street and find it on your Mac when you get " +
+      "home. The phone as a companion, not a copy.",
+    "soon.mailTitle": "Your inbox as a source",
+    "soon.mailText":
+      "“Tell me when the bank's email arrives.” What watchers already do with " +
+      "pages and prices, but with your mail.",
+    "soon.docsTitle": "Documents that never leave your Mac",
+    "soon.docsText":
+      "Drop a PDF — a contract, a manual, a receipt — and ask it questions, " +
+      "without uploading it anywhere.",
+    "soon.routinesTitle": "Routines",
+    "soon.routinesText":
+      "“Every Monday, ask me about the budget.” You set the rhythm; it " +
+      "remembers.",
+    "soon.timeTitle": "The weekly close for your time",
+    "soon.timeText":
+      "You already know where the money went. The same report for where the " +
+      "week went is still missing.",
     "moat.title": "Why Orchest, not another AI",
     "moat.subtitle": "The difference isn't what it integrates. It's its posture.",
     "moat.card1title": "Truly local-first",
@@ -1356,83 +1705,143 @@
   var closingBox = document.getElementById("demoClosing");
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // Frases de dinero y vigías en vez de recados genéricos: lo que hace que
+  // alguien piense "¿en serio puede hacer eso?" no es que ENTIENDA la frase
+  // —eso ya se lo espera de cualquier IA— sino que devuelva la cuenta hecha.
+  //
+  // `local: true` marca las frases que se resuelven enteras en la máquina, y
+  // el paso 2 lo dice en vez de mostrar una redacción vacía. Sin eso, una
+  // frase sin nombres ni correos dejaba ese paso sin nada que tachar.
   var PRESETS = {
-    "Llamar a Liam sobre la reunión en Central Park": {
+    "Gasté 45 mil en el mercado": {
       es: {
-        redacted:
-          'Llamar a <span class="demo-token">&lt;PERSON_1&gt;</span> sobre la reunión en ' +
-          '<span class="demo-token">&lt;LOCATION_1&gt;</span>',
-        task: { title: "Llamar a Liam", meta: "Sobre la reunión en Central Park", priority: "high" },
+        local: true,
+        result: {
+          kind: "money",
+          title: "Anotado · 45.000",
+          meta: "Mercado · hoy",
+          lines: ["Van 318.000 este mes", "Te quedan 182.000 para 11 días"],
+        },
       },
       en: {
-        redacted:
-          'Call <span class="demo-token">&lt;PERSON_1&gt;</span> about the meeting in ' +
-          '<span class="demo-token">&lt;LOCATION_1&gt;</span>',
-        task: { title: "Call Liam", meta: "About the meeting in Central Park", priority: "high" },
+        local: true,
+        result: {
+          kind: "money",
+          title: "Logged · 45",
+          meta: "Groceries · today",
+          lines: ["318 spent this month", "182 left for 11 days"],
+        },
       },
     },
-    "Recordarme enviar el informe a noah.becker@empresa.com mañana": {
+    "¿Me alcanza para unos audífonos de 300 mil?": {
       es: {
-        redacted:
-          'Recordarme enviar el informe a <span class="demo-token">&lt;EMAIL_1&gt;</span> mañana',
-        task: { title: "Enviar el informe", meta: "Vence: mañana", priority: "urgent" },
+        local: true,
+        result: {
+          kind: "answer",
+          title: "Sí, pero quedarías justo",
+          meta: "Al ritmo que llevas este mes",
+          lines: [
+            "Te quedarían 32.000 para los últimos 11 días",
+            "Son 2.900 por día — vienes gastando 16.500",
+          ],
+        },
       },
       en: {
-        redacted:
-          'Remind me to send the report to <span class="demo-token">&lt;EMAIL_1&gt;</span> tomorrow',
-        task: { title: "Send the report", meta: "Due: tomorrow", priority: "urgent" },
+        local: true,
+        result: {
+          kind: "answer",
+          title: "Yes, but it'd be tight",
+          meta: "At the pace you're going this month",
+          lines: [
+            "You'd have 32 left for the last 11 days",
+            "That's 2.90 a day — you've been spending 16.50",
+          ],
+        },
       },
     },
-    "Agendar café con Emma el viernes": {
+    "Le presté 80 mil a Emma el martes": {
       es: {
-        redacted: 'Agendar café con <span class="demo-token">&lt;PERSON_1&gt;</span> el viernes',
-        task: { title: "Café con Emma", meta: "El viernes", priority: "medium" },
+        redacted:
+          'Le presté 80 mil a <span class="demo-token">&lt;PERSON_1&gt;</span> el martes',
+        result: {
+          kind: "money",
+          title: "Emma te debe 80.000",
+          meta: "Desde el martes",
+          lines: ["No sale de tu bolsillo del mes: es un préstamo, no un gasto"],
+        },
       },
       en: {
-        redacted: 'Schedule coffee with <span class="demo-token">&lt;PERSON_1&gt;</span> on Friday',
-        task: { title: "Coffee with Emma", meta: "On Friday", priority: "medium" },
+        redacted:
+          'I lent 80 to <span class="demo-token">&lt;PERSON_1&gt;</span> on Tuesday',
+        result: {
+          kind: "money",
+          title: "Emma owes you 80",
+          meta: "Since Tuesday",
+          lines: ["Not counted against your month: it's a loan, not an expense"],
+        },
       },
     },
-    "Guardarle el teléfono a Ava: 55 1234 5678": {
+    "Avisame si el dólar baja de 3.900": {
       es: {
-        redacted:
-          'Guardarle el teléfono a <span class="demo-token">&lt;PERSON_1&gt;</span>: ' +
-          '<span class="demo-token">&lt;PHONE_1&gt;</span>',
-        task: { title: "Guardar teléfono de Ava", meta: "Nuevo contacto", priority: "low" },
+        local: true,
+        result: {
+          kind: "watch",
+          title: "Vigía activo",
+          meta: "Dólar · hoy está en 4.080",
+          lines: ["Te aviso una sola vez, cuando pase", "No cada vez que siga pasando"],
+        },
       },
       en: {
-        redacted:
-          'Save <span class="demo-token">&lt;PERSON_1&gt;</span>\'s phone number: ' +
-          '<span class="demo-token">&lt;PHONE_1&gt;</span>',
-        task: { title: "Save Ava's number", meta: "New contact", priority: "low" },
+        local: true,
+        result: {
+          kind: "watch",
+          title: "Watcher on",
+          meta: "USD · now at 4,080",
+          lines: ["I'll tell you once, when it happens", "Not every time it keeps happening"],
+        },
       },
     },
-    "Reservar mesa para cenar con Luca y Mia en Polanco el sábado": {
+    "Guardá 200 mil para el viaje": {
       es: {
-        redacted:
-          'Reservar mesa para cenar con <span class="demo-token">&lt;PERSON_1&gt;</span> y ' +
-          '<span class="demo-token">&lt;PERSON_2&gt;</span> en ' +
-          '<span class="demo-token">&lt;LOCATION_1&gt;</span> el sábado',
-        task: { title: "Cena con Luca y Mia", meta: "Sábado en Polanco", priority: "medium" },
+        local: true,
+        result: {
+          kind: "sobre",
+          title: "Sobre «Viaje» · 200.000",
+          meta: "Separado del gasto del mes",
+          lines: ["Meta: 1.500.000 — vas en 13%", "A este ritmo lo tienes en 7 meses"],
+        },
       },
       en: {
-        redacted:
-          'Book a dinner table with <span class="demo-token">&lt;PERSON_1&gt;</span> and ' +
-          '<span class="demo-token">&lt;PERSON_2&gt;</span> in ' +
-          '<span class="demo-token">&lt;LOCATION_1&gt;</span> on Saturday',
-        task: { title: "Dinner with Luca and Mia", meta: "Saturday in Polanco", priority: "medium" },
+        local: true,
+        result: {
+          kind: "sobre",
+          title: "«Trip» envelope · 200",
+          meta: "Set aside from this month's spending",
+          lines: ["Goal: 1,500 — you're at 13%", "At this rate you'll get there in 7 months"],
+        },
       },
     },
-    "Enviar el contrato a luca.silva@constructora.mx antes del jueves": {
+    "¿En qué se me fue la plata esta semana?": {
       es: {
-        redacted:
-          'Enviar el contrato a <span class="demo-token">&lt;EMAIL_1&gt;</span> antes del jueves',
-        task: { title: "Enviar el contrato", meta: "Vence: jueves", priority: "urgent" },
+        local: true,
+        result: {
+          kind: "answer",
+          title: "Comida, sobre todo",
+          meta: "142.000 esta semana",
+          lines: [
+            "Comida 68.000 · Transporte 39.000 · Ocio 35.000",
+            "12% menos que la semana pasada",
+          ],
+        },
       },
       en: {
-        redacted:
-          'Send the contract to <span class="demo-token">&lt;EMAIL_1&gt;</span> before Thursday',
-        task: { title: "Send the contract", meta: "Due: Thursday", priority: "urgent" },
+        local: true,
+        result: {
+          kind: "answer",
+          title: "Food, mostly",
+          meta: "142 this week",
+          lines: ["Food 68 · Transport 39 · Fun 35", "12% less than last week"],
+        },
       },
     },
   };
@@ -1477,9 +1886,38 @@
     pending.push(typer);
   }
 
+  // Textos del paso 2. Viven acá, y no en el diccionario `MSG` de la sección
+  // de cuenta, porque `t()` pertenece a OTRO bloque cerrado: llamarla desde
+  // este daba ReferenceError, el manejador del clic moría y la demo entera
+  // dejaba de responder sin mostrar ningún error visible.
+  var DEMO_TXT_ES = {
+    step2: "2. Esto es lo único que saldría de tu máquina",
+    step2local: "2. Qué salió de tu máquina",
+    nothing: "Nada. Esto se resolvió entero en tu Mac.",
+  };
+  var DEMO_TXT_EN = {
+    step2: "2. This is the only thing that would leave your machine",
+    step2local: "2. What left your machine",
+    nothing: "Nothing. This was resolved entirely on your Mac.",
+  };
+
   function showRedaction(key) {
     var preset = PRESETS[key][window.ORCHEST_LANG === "en" ? "en" : "es"];
-    redactedText.innerHTML = preset.redacted;
+    var DEMO_TXT = window.ORCHEST_LANG === "en" ? DEMO_TXT_EN : DEMO_TXT_ES;
+    var label = document.querySelector("#demoRedaction .demo-redaction-label");
+
+    if (preset.local) {
+      // Sin nombres ni correos no hay nada que tachar, y mostrar el texto
+      // igualito haría parecer que este paso no hace nada. Lo que sí es
+      // cierto —y pega más fuerte— es que esa frase no salió de la máquina.
+      label.textContent = DEMO_TXT.step2local;
+      redactedText.innerHTML =
+        '<span class="demo-nothing">' + DEMO_TXT.nothing + "</span>";
+    } else {
+      label.textContent = DEMO_TXT.step2;
+      redactedText.innerHTML = preset.redacted;
+    }
+
     redactionBox.hidden = false;
     pending.push(
       setTimeout(
@@ -1492,10 +1930,28 @@
   }
 
   function showResult(key) {
-    var task = PRESETS[key][window.ORCHEST_LANG === "en" ? "en" : "es"].task;
-    taskCard.className = "demo-task-card priority-" + task.priority;
-    taskCard.querySelector(".demo-task-title").textContent = task.title;
-    taskCard.querySelector(".demo-task-meta").textContent = task.meta;
+    var r = PRESETS[key][window.ORCHEST_LANG === "en" ? "en" : "es"].result;
+    taskCard.className = "demo-task-card demo-card-" + r.kind;
+    taskCard.querySelector(".demo-task-title").textContent = r.title;
+    taskCard.querySelector(".demo-task-meta").textContent = r.meta;
+
+    // Las líneas de contexto son lo que convierte "lo anoté" en "y esto es lo
+    // que significa". La cuenta ya hecha es lo que nadie espera de un
+    // asistente de voz, y es donde aparece el "¿en serio puede hacer eso?".
+    var extra = taskCard.querySelector(".demo-task-lines");
+    if (!extra) {
+      extra = document.createElement("div");
+      extra.className = "demo-task-lines";
+      taskCard.appendChild(extra);
+    }
+    extra.innerHTML = "";
+    (r.lines || []).forEach(function (line) {
+      var el = document.createElement("div");
+      el.className = "demo-task-line";
+      el.textContent = line;
+      extra.appendChild(el);
+    });
+
     resultBox.hidden = false;
     pending.push(
       setTimeout(
@@ -1634,6 +2090,38 @@
       // Storage bloqueado (modo privado, etc.) — la sesión no persiste entre
       // recargas, pero la pestaña actual sigue funcionando con normalidad.
     }
+  }
+
+  // El access_token de Supabase vive ~1 hora; el refresh_token que se guarda
+  // junto a él en el login dura mucho más. Antes se guardaba y no se usaba
+  // nunca, así que a la hora de haber iniciado sesión la descarga fallaba con
+  // "tu sesión expiró" y había que escribir la contraseña otra vez — el
+  // reporte original. Renovar en silencio es lo que evita ese muro.
+  function refreshSession() {
+    var session = getSession();
+    if (!session || !session.refresh_token) return Promise.resolve(false);
+    return fetch(SUPABASE_URL + "/auth/v1/token?grant_type=refresh_token", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY },
+      body: JSON.stringify({ refresh_token: session.refresh_token }),
+    })
+      .then(function (res) {
+        return res.json().then(function (body) {
+          return { ok: res.ok, body: body };
+        });
+      })
+      .then(function (result) {
+        if (!result.ok || !result.body.access_token) return false;
+        saveSession({
+          access_token: result.body.access_token,
+          refresh_token: result.body.refresh_token || session.refresh_token,
+          email: session.email,
+        });
+        return true;
+      })
+      .catch(function () {
+        return false;
+      });
   }
 
   function clearSession() {
@@ -1852,6 +2340,53 @@
     URL.revokeObjectURL(url);
   }
 
+  // Un solo intento contra Supabase Storage, clasificado — separado de
+  // downloadRelease() para poder correrlo dos veces (antes y después de un
+  // refresco de sesión) sin duplicar la lógica.
+  function attemptDownload(accessToken) {
+    return fetch(SUPABASE_URL + RELEASE_PATH, {
+      cache: "no-store",
+      headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + accessToken },
+    }).then(function (res) {
+      if (res.ok) {
+        return res.blob().then(function (blob) {
+          return { ok: true, blob: blob };
+        });
+      }
+      // Supabase Storage envuelve el código real DENTRO del JSON — el status
+      // HTTP externo suele ser 400 sin importar la causa real ("Invalid
+      // Compact JWS" para token vencido, "Object not found" para un release
+      // que aún no subimos). Por eso se clasifica por el contenido.
+      return res
+        .json()
+        .catch(function () {
+          return {};
+        })
+        .then(function (body) {
+          return { ok: false, status: res.status, body: body };
+        });
+    });
+  }
+
+  function classifyDownloadError(result) {
+    var bodyCode = String((result.body && result.body.statusCode) || "");
+    var bodyError = ((result.body && (result.body.error || result.body.message)) || "").toLowerCase();
+    var isAuthError =
+      result.status === 401 ||
+      result.status === 403 ||
+      bodyCode === "401" ||
+      bodyCode === "403" ||
+      bodyError.indexOf("unauthorized") !== -1 ||
+      bodyError.indexOf("jws") !== -1 ||
+      bodyError.indexOf("jwt") !== -1;
+    var isMissing =
+      result.status === 404 ||
+      bodyCode === "404" ||
+      bodyError.indexOf("not found") !== -1 ||
+      bodyError.indexOf("not_found") !== -1;
+    return { isAuthError: isAuthError, isMissing: isMissing };
+  }
+
   function downloadRelease() {
     var session = getSession();
     accountSection.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1871,29 +2406,22 @@
     postDownloadLink.classList.remove("is-visible");
     setDownloadButtonsState(t("downloading"), true);
 
-    fetch(SUPABASE_URL + RELEASE_PATH, {
-      cache: "no-store",
-      headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + session.access_token },
-    })
-      .then(function (res) {
-        if (res.ok) {
-          return res.blob().then(function (blob) {
-            return { ok: true, blob: blob };
-          });
-        }
-        // Supabase Storage envuelve el código real DENTRO del JSON — el
-        // status HTTP externo suele ser 400 sin importar la causa real
-        // ("Invalid Compact JWS" para token vencido/inválido, "Bucket not
-        // found" u "Object not found" para un release que aún no subimos).
-        // Por eso clasificamos por el contenido, no por el status externo.
-        return res
-          .json()
-          .catch(function () {
-            return {};
-          })
-          .then(function (body) {
-            return { ok: false, status: res.status, body: body };
-          });
+    attemptDownload(session.access_token)
+      .then(function (result) {
+        if (result.ok) return result;
+
+        var cls = classifyDownloadError(result);
+        if (!cls.isAuthError) return result;
+
+        // El access_token expiró (típico: se inició sesión hace más de una
+        // hora), pero el refresh_token guardado en el login sigue vivo — se
+        // renueva en silencio antes de asumir que hace falta escribir la
+        // contraseña de nuevo.
+        return refreshSession().then(function (refreshed) {
+          if (!refreshed) return result;
+          var fresh = getSession();
+          return attemptDownload(fresh.access_token);
+        });
       })
       .then(function (result) {
         if (result.ok) {
@@ -1903,29 +2431,16 @@
           return;
         }
 
-        var bodyCode = String((result.body && result.body.statusCode) || "");
-        var bodyError = ((result.body && (result.body.error || result.body.message)) || "").toLowerCase();
-        var isAuthError =
-          result.status === 401 ||
-          result.status === 403 ||
-          bodyCode === "401" ||
-          bodyCode === "403" ||
-          bodyError.indexOf("unauthorized") !== -1 ||
-          bodyError.indexOf("jws") !== -1 ||
-          bodyError.indexOf("jwt") !== -1;
-        var isMissing =
-          result.status === 404 ||
-          bodyCode === "404" ||
-          bodyError.indexOf("not found") !== -1 ||
-          bodyError.indexOf("not_found") !== -1;
-
-        if (isAuthError) {
+        var cls = classifyDownloadError(result);
+        if (cls.isAuthError) {
+          // Ya se intentó renovar y tampoco sirvió: acá sí hay que volver a
+          // entrar de verdad.
           clearSession();
           renderAuthState();
           showAuthMessage(t("sessionExpired"), "error");
           return;
         }
-        if (isMissing) {
+        if (cls.isMissing) {
           showDownloadMessage(t("notAvailableYet"), "error");
           return;
         }
